@@ -15,7 +15,7 @@ export default function Hero() {
               السعودية.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-accent hover:bg-primary-gold text-primary font-bold text-base h-12 px-8"> 
+            <Button className="hidden sm:inline-flex bg-primary hover:bg-primary-light text-white"> 
               <Link href="/delivery-request">اطلب توصيل الآن</Link>
               </Button>
               <Button
