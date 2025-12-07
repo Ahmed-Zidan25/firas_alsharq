@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export default function Hero() {
   return (
-    <section className="relative py-8 md:py-16 overflow-hidden bg-white">
+    <section className="bg-gradient-to-r from-primary to-primary-light py-16 md:py-20 text-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Text Content */}
