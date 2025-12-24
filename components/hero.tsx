@@ -14,20 +14,18 @@ export default function Hero() {
               متخصصون في نقل الأثاث والمنقولات بكل احترافية وأمان. خدمة عملاء متميزة وفريق محترف في المملكة العربية
               السعودية.
             </p>
-            </div>
             
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button className="bg-primary hover:bg-primary-light text-white font-bold text-base h-12 px-8">
                 <Link href="/delivery-request">اطلب توصيل الآن</Link>
               </Button>
-             
               <Button
                 variant="outline"
                 className="border-2 border-primary text-primary hover:bg-primary/5 font-bold text-base h-12 px-8 bg-transparent"
               >
                 <Link href="/about">تعرف علينا أكثر</Link>
               </Button>
-           
+            </div>
           </div>
 
           {/* Hero Image */}
