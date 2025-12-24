@@ -57,7 +57,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <MessageCircleMore className="w-4 h-4" />
-                <a href="tel:+966705451313" className="hover:text-primary-gold transition-colors">
+                <a href="https://wa.me/966705451313" className="hover:text-primary-gold transition-colors">
                   +966 54 210 0371
                 </a>
               </div>

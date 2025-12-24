@@ -24,7 +24,7 @@ export default function CallToAction() {
               <Link href="/contact">اتصل بنا</Link>
             </Button>
           </div> */}
-         <div className="flex flex-col sm:flex-row gap-4 pt-4">
+        <div className="flex flex-col items-center sm:flex-row sm:justify-center gap-4 pt-4">
                        <Button className="bg-primary hover:bg-primary-light text-white font-bold text-base h-12 px-8">
                          <Link href="/delivery-request">اطلب توصيل</Link>
                        </Button>
