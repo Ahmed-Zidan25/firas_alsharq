@@ -33,8 +33,8 @@ export default function ContactPage() {
                 <Phone className="w-8 h-8 text-primary" />
               </div>
               <h3 className="font-bold text-lg mb-2 text-foreground">الهاتف</h3>
-              <a href="tel:+966" className="text-primary hover:text-primary-light transition-colors">
-                +966 XX XXX XXXX
+              <a href="https://wa.me/966705451313" className="text-primary hover:text-primary-light transition-colors">
+               +966 54 210 0371
               </a>
             </Card>
 
@@ -44,10 +44,10 @@ export default function ContactPage() {
               </div>
               <h3 className="font-bold text-lg mb-2 text-foreground">البريد الإلكتروني</h3>
               <a
-                href="mailto:info@faras-alshark.com"
+                href="mailto:shroukamr29072006@gmail.com"
                 className="text-primary hover:text-primary-light transition-colors"
               >
-                info@faras-alshark.com
+                shroukamr29072006@gmail.com
               </a>
             </Card>
 
@@ -56,15 +56,15 @@ export default function ContactPage() {
                 <MapPin className="w-8 h-8 text-primary" />
               </div>
               <h3 className="font-bold text-lg mb-2 text-foreground">الموقع</h3>
-              <p className="text-muted-foreground">الرياض، المملكة العربية السعودية</p>
+              <p className="text-muted-foreground">حى المروه، شارع حراء، جده، بجوار بنك الراجحي، المملكة العربية السعودية</p>
             </Card>
 
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
               <div className="flex justify-center mb-4">
                 <Clock className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="font-bold text-lg mb-2 text-foreground">ساعات العمل</h3>
-              <p className="text-muted-foreground text-sm">24/7</p>
+              <h3 className="font-bold text-lg mb-2 text-foreground">مواعيد العمل</h3>
+              <p className="text-muted-foreground text-sm">24 ساعة / 7 أيام بالأسبوع</p>
             </Card>
           </div>
         </div>

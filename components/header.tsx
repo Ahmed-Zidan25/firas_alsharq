@@ -23,7 +23,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/images/logo.jpg" alt="فراس الشرق" width={50} height={50} className="h-12 w-auto" />
+            <Image src="/images/logo.png" alt="فراس الشرق" width={50} height={50} className="h-12 w-auto" />
             <span className="hidden sm:inline font-bold text-lg text-primary">فراس الشرق</span>
           </Link>
 

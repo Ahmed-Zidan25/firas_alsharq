@@ -6,27 +6,16 @@ import { Card } from "@/components/ui/card"
 export default function SocialMedia() {
   const socialLinks = [
     {
-      name: "فيسبوك",
+     /*  name: "فيسبوك", */
       icon: Facebook,
-      url: "https://facebook.com/farasalshark",
+      url: "https://www.facebook.com/share/1757AxaraS/",
       color: "hover:text-blue-600",
     },
+    
     {
-      name: "لينكدإن",
-      icon: Linkedin,
-      url: "https://linkedin.com/company/faras-alshark",
-      color: "hover:text-blue-700",
-    },
-    {
-      name: "تويتر",
-      icon: Twitter,
-      url: "https://twitter.com/farasalshark",
-      color: "hover:text-blue-400",
-    },
-    {
-      name: "إنستجرام",
+      /* name: "إنستجرام", */
       icon: Instagram,
-      url: "https://instagram.com/farasalshark",
+      url: "https://help.instagram.com/1731078377046291",
       color: "hover:text-pink-600",
     },
   ]

@@ -20,6 +20,52 @@ export default function GalleryGrid() {
       description: "تغليف عالي الجودة لحماية الأثاث",
       image: "/images/img-20251202-wa0018.jpg",
     },
+
+    {
+      id: 3,
+      title: "تغليف احترافي",
+      description: "تغليف عالي الجودة لحماية الأثاث",
+      image: "/images/10.jpeg",
+    },
+    {
+      id: 4,
+      title: "تغليف احترافي",
+      description: "تغليف عالي الجودة لحماية الأثاث",
+      image: "/images/11.jpeg",
+    },
+    {
+      id: 5,
+      title: "تغليف احترافي",
+      description: "تغليف عالي الجودة لحماية الأثاث",
+      image: "/images/12.jpeg",
+    },
+    {
+      id: 6,
+      title: "تغليف احترافي",
+      description: "تغليف عالي الجودة لحماية الأثاث",
+      image: "/images/13.jpeg",
+    },
+    {
+      id: 7,
+      title: "تغليف احترافي",
+      description: "تغليف عالي الجودة لحماية الأثاث",
+      image: "/images/14.jpeg",
+    },
+    {
+      id: 8,
+      title: "تغليف احترافي",
+      description: "تغليف عالي الجودة لحماية الأثاث",
+      image: "/images/15.jpeg",
+    },
+    {
+      id: 8,
+      title: "تغليف احترافي",
+      description: "تغليف عالي الجودة لحماية الأثاث",
+      image: "/images/16.jpeg",
+    },
+    
+
+
     {
       id: 3,
       title: "فريق النقل المحترف",

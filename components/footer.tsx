@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Logo & About */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <Image src="/images/logo.jpg" alt="فراس الشرق" width={40} height={40} className="h-10 w-auto" />
+              <Image src="/images/logo.png" alt="فراس الشرق" width={40} height={40} className="h-10 w-auto" />
               <h3 className="text-lg font-bold">فراس الشرق</h3>
             </div>
             <p className="text-sm text-white/80">
