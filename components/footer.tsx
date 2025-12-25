@@ -50,12 +50,6 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-4">تواصل معنا</h3>
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <a href="tel:+966542100371" className="hover:text-primary-gold transition-colors">
-                  +966 54 210 0371
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
   <Phone className="w-4 h-4" />
   <a 
     href="tel:+966542100371"
