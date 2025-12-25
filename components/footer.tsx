@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Logo & About */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <Image src="/images/logo.png" alt="فراس الشرق" width={40} height={40} className="h-10 w-auto" />
+              <Image src="/images/Logo.png" alt="فراس الشرق" width={40} height={40} className="h-10 w-auto" />
               <h3 className="text-lg font-bold">فراس الشرق</h3>
             </div>
             <p className="text-sm text-white/80">
@@ -56,14 +56,34 @@ export default function Footer() {
                 </a>
               </div>
               <div className="flex items-center gap-2">
+  <Phone className="w-4 h-4" />
+  <a 
+    href="tel:+966542100371"
+    dir="ltr" 
+    className="hover:text-primary-gold transition-colors inline-block"
+  >
+    +966 54 210 0371
+  </a>
+</div>
+             {/*  <div className="flex items-center gap-2">
                 <MessageCircleMore className="w-4 h-4" />
                 <a href="https://wa.me/966705451313" className="hover:text-primary-gold transition-colors">
                   +966 54 210 0371
                 </a>
-              </div>
+              </div> */}
+              <div className="flex items-center gap-2">
+  <MessageCircleMore className="w-4 h-4" />
+  <a 
+    href="https://wa.me/966705451313" 
+    dir="ltr" 
+    className="hover:text-primary-gold transition-colors inline-block"
+  >
+    +966 54 210 0371
+  </a>
+</div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>الرياض، المملكة العربية السعودية</span>
+                <span>حى المروه، شارع حراء، جده، بجوار بنك الراجحي، المملكة العربية السعودية</span>
               </div>
             </div>
           </div>

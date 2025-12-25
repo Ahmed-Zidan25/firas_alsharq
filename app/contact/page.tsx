@@ -28,15 +28,20 @@ export default function ContactPage() {
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="flex justify-center mb-4">
-                <Phone className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-foreground">الهاتف</h3>
-              <a href="https://wa.me/966705451313" className="text-primary hover:text-primary-light transition-colors">
-               +966 54 210 0371
-              </a>
-            </Card>
+           <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+  <div className="flex justify-center mb-4">
+    <Phone className="w-8 h-8 text-primary" />
+  </div>
+  <h3 className="font-bold text-lg mb-2 text-foreground">الهاتف</h3>
+  {/* Add dir="ltr" and inline-block to ensure the number displays correctly */}
+  <a 
+    href="https://wa.me/966705451313" 
+    dir="ltr" 
+    className="text-primary hover:text-primary-light transition-colors inline-block"
+  >
+    +966 54 210 0371
+  </a>
+</Card>
 
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
               <div className="flex justify-center mb-4">
