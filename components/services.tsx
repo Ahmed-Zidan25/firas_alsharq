@@ -4,9 +4,9 @@ import React from "react";
 import { Truck, Package, Clock, Users, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import useEmblaCarousel from "embla-carousel-react";
+import { motion } from "framer-motion"; // Import framer-motion
 
 export default function Services() {
-  // Carousel configuration for RTL and looping
   const [emblaRef] = useEmblaCarousel({ dir: "rtl", loop: true });
 
   const services = [
@@ -55,27 +55,40 @@ export default function Services() {
       {/* Services Section */}
       <section id="services" className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground"
+          >
             خدماتنا
-          </h2>
+          </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
-                  <div className="flex justify-center mb-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Icon className="w-8 h-8 text-primary" />
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Card className="p-6 hover:shadow-lg transition-shadow">
+                    <div className="flex justify-center mb-4">
+                      <div className="p-3 bg-primary/10 rounded-lg">
+                        <Icon className="w-8 h-8 text-primary" />
+                      </div>
                     </div>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-center text-foreground">
-                    {service.title}
-                  </h3>
-                  <p className="text-center text-muted-foreground">
-                    {service.description}
-                  </p>
-                </Card>
+                    <h3 className="text-xl font-bold mb-2 text-center text-foreground">
+                      {service.title}
+                    </h3>
+                    <p className="text-center text-muted-foreground">
+                      {service.description}
+                    </p>
+                  </Card>
+                </motion.div>
               );
             })}
           </div>
@@ -85,18 +98,27 @@ export default function Services() {
       {/* Testimonials Section */}
       <section className="py-16 md:py-24 bg-muted/30" dir="rtl">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+          <motion.h2 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground"
+          >
             آراء عملائنا
-          </h2>
+          </motion.h2>
 
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {testimonials.map((t, index) => (
-                <div
+                <motion.div
                   key={index}
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
                   className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.33%] px-4"
                 >
-                  <Card className="h-full border-none shadow-md">
+                  <Card className="h-full border-none shadow-md hover:scale-105 transition-transform duration-300">
                     <CardContent className="p-8 flex flex-col items-center text-center">
                       <div className="bg-primary/10 p-3 rounded-full mb-4">
                         <Quote className="w-6 h-6 text-primary rotate-180" />
@@ -110,12 +132,12 @@ export default function Services() {
                       </div>
                     </CardContent>
                   </Card>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
 
-          <p className="text-center text-sm text-muted-foreground mt-8">
+          <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse">
             اسحب لليسار أو اليمين لمشاهدة المزيد
           </p>
         </div>
