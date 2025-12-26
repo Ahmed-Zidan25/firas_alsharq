@@ -3,7 +3,7 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
-// Added missing Card sub-components to the import list
+// Added missing sub-components to the import list
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import SocialMedia from "@/components/social-media"
 
@@ -86,17 +86,17 @@ export default function ContactPage() {
                 <CardDescription>عنوان مكتبنا بجدة - المملكة العربية السعودية</CardDescription>
               </CardHeader>
               <CardContent>
-                {/* FIX: Changed aspect-[21/9] to a fixed height to resolve Vercel build error */}
-                <div className="min-h-[400px] w-full rounded-xl overflow-hidden shadow-xl">
+                {/* REMOVED aspect-[21/9] and used h-[450px] to fix RangeError */}
+                <div className="h-[450px] w-full rounded-xl overflow-hidden shadow-xl">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3709.6582570371454!2d39.20815347596009!3d21.60024476711516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3d97439000001%3A0x867018ec2a68897c!2z2LTYp9ix2Lkg2K3Ysdin2KEsINin2YTZhdis2YjZhywg2KzYr9ipIDIzNTQ0LCDYp9mE2YXZhNmD2Kkg2KfZhNi52LHYqNmK2Kkg2KfZhNiz2LnZiNiv2YrYqQ!5e0!3m2!1sar!2ssa!4v1715600000000!5m2!1sar!2ssa"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3709.112448834458!2d39.1866!3d21.6214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDM3JzE3LjAiTiAzOcKwMTEnMTEuOCJF!5e0!3m2!1sen!2ssa!4v1620000000000!5m2!1sen!2ssa"
                     width="100%"
-                    height="400"
+                    height="100%"
                     style={{ border: 0 }}
                     allowFullScreen={true}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="موقع فراس الشرق"
+                    title="فراس الشرق"
                   ></iframe>
                 </div>
                 
