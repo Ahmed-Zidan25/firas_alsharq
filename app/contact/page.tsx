@@ -1,7 +1,8 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { Phone, Mail, MapPin, Clock } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { MapPin, Phone, Mail, Clock } from "lucide-react"
+
 
 
 export const metadata = {
@@ -78,7 +79,7 @@ export default function ContactPage() {
         </div>
 </section>
 <section>
-  <div className="mb-20 max-w-4xl mx-auto">
+  <div className="mb-20 max-w-5xl mx-auto">
           <Card className="border-border">
             <CardHeader>
              <CardTitle className="text-gray-800 flex items-center space-x-2">
