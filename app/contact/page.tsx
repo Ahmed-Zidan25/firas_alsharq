@@ -76,8 +76,9 @@ export default function ContactPage() {
 
 
         </div>
-
-  <div className="mb-20">
+</section>
+<section>
+  <div className="mb-20 max-w-4xl mx-auto">
           <Card className="border-border">
             <CardHeader>
              <CardTitle className="text-gray-800 flex items-center space-x-2">
