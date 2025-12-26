@@ -69,35 +69,7 @@ export default function ContactPage() {
           </div>
 
           {/* Map Section */}
-          <div className="max-w-5xl mx-auto mb-20">
-            <Card className="overflow-hidden border-border">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-red-600" />
-                  <span>موقعنا على الخريطة</span>
-                </CardTitle>
-                <CardDescription>حي المروه، شارع حراء، جده، بجوار بنك الراجحي</CardDescription>
-              </CardHeader>
-              <CardContent>
-                {/* FIXED: Removed aspect ratio logic and used a standard pixel height */}
-                <div className="w-full h-96 rounded-xl overflow-hidden shadow-md">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3708.963442436842!2d39.1865!3d21.6122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDM2JzQzLjkiTiAzOcKwMTEnMTEuNCJF!5e0!3m2!1sen!2ssa!4v1700000000000"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    title="موقع مكتب فراس الشرق"
-                  ></iframe>
-                </div>
-                <p className="text-sm text-gray-600 mt-4 flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-primary" />
-                  المملكة العربية السعودية، جدة، حي المروة، شارع حراء
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+          
         </div>
       </section>
 
