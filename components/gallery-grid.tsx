@@ -2,12 +2,13 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { X } from "lucide-react"
+import { X, PlayCircle } from "lucide-react" // Added Play icon for visual cue
 
 export default function GalleryGrid() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
 
   const galleryImages = [
+  
     {
       id: 1,
       title: "نقل أثاث فاخر",
@@ -58,43 +59,73 @@ export default function GalleryGrid() {
       image: "/images/15.jpeg",
     },
     {
-      id: 8,
+      id: 9,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
       image: "/images/16.jpeg",
     },
-    
+    {
+      id: 10,
+      title: "تغليف احترافي",
+      description: "تغليف عالي الجودة لحماية الأثاث",
+      image: "/images/17.jpeg",
+    },
+    {
+      id: 11,
+      title: "تغليف احترافي",
+      description: "تغليف عالي الجودة لحماية الأثاث",
+      image: "/images/17.jpeg",
+    },
+    {
+      id: 12,
+      title: "تغليف احترافي",
+      description: "تغليف عالي الجودة لحماية الأثاث",
+      image: "/images/19.jpeg",
+    },
+     {
+      id: 13,
+      title: "شاحنات نقل حديثة",
+      description: "أسطول معدات حديثة وآمنة",
+      image: "/images/img-20251202-wa0021.jpg",
+    },
 
 
     {
-      id: 3,
+      id: 14,
       title: "فريق النقل المحترف",
       description: "فريقنا المدرب والخبير",
       image: "/images/img-20251202-wa0011.jpg",
     },
     {
-      id: 4,
+      id: 15,
       title: "شاحنات نقل حديثة",
       description: "أسطول معدات حديثة وآمنة",
       image: "/images/img-20251202-wa0021.jpg",
     },
     {
-      id: 5,
+      id: 16,
       title: "خدمة التغليف",
       description: "تغليف احترافي وآمن",
       image: "/images/img-20251207-wa0004.jpg",
     },
     {
-      id: 6,
+      id: 17,
       title: "فرش واستقرار",
       description: "فرش احترافي بعد النقل",
       image: "/images/img-20251207-wa0008.jpg",
     },
     {
-      id: 7,
+      id: 18,
       title: "نقل آمن",
       description: "أثناء عملية النقل الآمن",
       image: "/images/img-20251202-wa0025.jpg",
+    },
+     { id: 19,
+      type: "video", // Identify as video
+      title: "نقل أثاث فاخر",
+      description: "استخدام الرافعات المتطورة لنقل الأثاث",
+      src: "/videos/vid1.mp4", // Path to your mp4
+      //thumbnail: "/images/img-20251202-wa0009.jpg", // Image to show before play
     },
   ]
 
