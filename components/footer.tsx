@@ -75,13 +75,14 @@ export default function Footer() {
                 <span>حى المروه، شارع حراء، جده، بجوار بنك الراجحي، المملكة العربية السعودية</span>
               </div>
             
-          </div>
+          
 		  <div className="space-y-4">
             <h3 className="font-semibold text-foreground">تابعنا على وسائل التواصل</h3>
             <SocialMedia variant="minimal" />
             <p className="text-muted-foreground text-sm">تواصل معنا عبر منصات التواصل الاجتماعي للحصول على آخر المستجدات والعروض</p>
           </div>
         </div>
+</div>
 </div>
         <div className="border-t border-white/20 pt-8 text-center text-sm text-white/70">
           <p>&copy; 2025 فراس الشرق - نقل الأثاث. جميع الحقوق محفوظة.</p>
