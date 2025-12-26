@@ -89,7 +89,7 @@ export default function ContactPage() {
       </section>
 
       {/* Social Media Section */}
-      <SocialMedia />
+      {/* <SocialMedia /> */}
 
       <Footer />
     </main>

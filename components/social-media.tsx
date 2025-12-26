@@ -1,6 +1,6 @@
 "use client"
 
-import { Facebook, Linkedin, Twitter, Instagram } from "lucide-react"
+import { Facebook, Instagram } from "lucide-react"
 import { Card } from "@/components/ui/card"
 
 export default function SocialMedia() {

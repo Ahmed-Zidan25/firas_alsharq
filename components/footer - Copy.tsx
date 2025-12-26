@@ -59,7 +59,13 @@ export default function Footer() {
     +966 54 210 0371
   </a>
 </div>
-     <div className="flex items-center gap-2">
+             {/*  <div className="flex items-center gap-2">
+                <MessageCircleMore className="w-4 h-4" />
+                <a href="https://wa.me/966705451313" className="hover:text-primary-gold transition-colors">
+                  +966 54 210 0371
+                </a>
+              </div> */}
+              <div className="flex items-center gap-2">
   <MessageCircleMore className="w-4 h-4" />
   <a 
     href="https://wa.me/966705451313" 
@@ -74,17 +80,6 @@ export default function Footer() {
                 <span>حى المروه، شارع حراء، جده، بجوار بنك الراجحي، المملكة العربية السعودية</span>
               </div>
             </div>
-          </div>
-		  <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">Connect With Us</h3>
-            <SocialMedia variant="minimal" />
-            <p className="text-muted-foreground text-sm">
-              Cairo, Egypt
-              <br />
-              +20 100 353 9052
-              <br />
-              Export@deltafoodstuffs.com
-            </p>
           </div>
         </div>
 
