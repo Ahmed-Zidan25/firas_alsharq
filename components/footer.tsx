@@ -1,4 +1,5 @@
 import Link from "next/link"
+import SocialMedia from "./social-media"
 import Image from "next/image"
 import { Phone, MapPin , MessageCircleMore} from "lucide-react"
 
