@@ -17,17 +17,17 @@ export default function Services() {
   ]); */
 
   const [emblaRef] = useEmblaCarousel({ 
-    dir: "rtl", 
+    dir: "ltr", 
     loop: true, 
     align: "start",
     // 1. Decrease movement speed (Higher number = Slower transition)
     // Default is 25. Setting it to 40-50 makes it much smoother and slower.
-    duration: 45, 
+    duration: 60, 
     // 2. Ensure it scrolls exactly one card at a time
     slidesToScroll: 1 
   }, [
     // 3. Increase delay to let users read the card before it moves (e.g., 5000ms)
-    Autoplay({ delay: 4000, stopOnInteraction: true })
+    Autoplay({ delay: 5000, stopOnInteraction: false })
   ]);
 
   const services = [
