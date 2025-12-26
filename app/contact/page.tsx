@@ -2,7 +2,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
 import { Card } from "@/components/ui/card"
-import SocialMedia from "@/components/social-media"
+
 
 export const metadata = {
   title: "تواصل معنا - فراس الشرق",
@@ -56,19 +56,6 @@ export default function ContactPage() {
   </a>
 </Card>
 
-         {/*    <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="flex justify-center mb-4">
-                <Mail className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-foreground">البريد الإلكتروني</h3>
-              <a
-                href="mailto:shroukamr29072006@gmail.com"
-                className="text-primary hover:text-primary-light transition-colors"
-              >
-                shroukamr29072006@gmail.com
-              </a>
-            </Card> */}
-
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
               <div className="flex justify-center mb-4">
                 <MapPin className="w-8 h-8 text-primary" />
@@ -85,6 +72,42 @@ export default function ContactPage() {
               <p className="text-muted-foreground text-sm">24 ساعة / 7 أيام بالأسبوع</p>
             </Card>
           </div>
+            <div className="mb-20">
+          <Card className="border-border">
+            <CardHeader>
+             <CardTitle className="text-gray-800 flex items-center space-x-2">
+              <MapPin className="h-5 w-5 text-red-600" />
+              <span>Find Us</span>
+            </CardTitle>
+  
+              <CardDescription>Our head office location in Cairo, Egypt</CardDescription>
+            </CardHeader>
+            <CardContent>
+            {/* The interactive map is embedded here using an iframe. */}
+            <div className="aspect-[21/9] rounded-xl overflow-hidden shadow-xl">
+              <iframe
+                // The source uses the specified address for accurate pinning
+                src="https://maps.google.com/maps?q=100%20Al%20Merghani,%20Al%20Golf,%20Nasr%20City,%20Cairo%20Governorate%204451426,%20Egypt&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Delta Foodstuffs Office Location"
+              ></iframe>
+            </div>
+            
+            {/* Displaying the physical address for clarity */}
+            <p className="text-sm text-gray-600 mt-4 flex items-center justify-center sm:justify-start">
+                <MapPin className="h-4 w-4 text-teal-600 mr-2" />
+                100 Merghany st., Masr El Gedida, Cairo, Egypt
+            </p>
+          </CardContent>
+          </Card>
+        </div> 
+
+
         </div>
       </section>
 

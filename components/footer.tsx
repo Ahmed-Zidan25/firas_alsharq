@@ -78,14 +78,7 @@ export default function Footer() {
                 <MapPin className="w-4 h-4" />
                  <p className="text-sm text-white/80">حى المروه، شارع حراء، جده، بجوار بنك الراجحي، المملكة العربية السعودية</p>
               </div>
-            
-          
-		  <div className="space-y-4">
-            <h3 className="text-lg font-bold mb-4">تابعنا على وسائل التواصل</h3>
-            <SocialMedia variant="minimal" />
-             <p className="text-sm text-white/80">تواصل معنا عبر منصات التواصل الاجتماعي للحصول على آخر المستجدات والعروض</p>
-          </div>
-        </div>
+           
 </div>
 </div>
         <div className="border-t border-white/20 pt-8 text-center text-sm text-white/70">
