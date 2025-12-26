@@ -17,7 +17,7 @@ export default function Footer() {
             <p className="text-sm text-white/80">
               متخصصون في نقل الأثاث والمنقولات بكل احترافية وأمان في المملكة العربية السعودية.
             </p>
-             <h3 className="text-lg font-bold mb-4">تابعنا على وسائل التواصل</h3>
+             <p className="text-lg font-bold mb-4">تابعنا على وسائل التواصل</p>
             <SocialMedia variant="minimal" />
              <p className="text-sm text-white/80">تواصل معنا عبر منصات التواصل الاجتماعي للحصول على آخر المستجدات والعروض</p>
          
