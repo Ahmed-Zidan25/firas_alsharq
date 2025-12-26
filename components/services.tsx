@@ -8,12 +8,26 @@ import Autoplay from "embla-carousel-autoplay";
 
 export default function Services() {
   // 1. Logic Fix: Set 'align' to 'start' to prevent floating gaps
-  const [emblaRef] = useEmblaCarousel({ 
+  /* const [emblaRef] = useEmblaCarousel({ 
     dir: "rtl", 
     loop: true, 
     align: "start" 
   }, [
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  ]); */
+
+  const [emblaRef] = useEmblaCarousel({ 
+    dir: "rtl", 
+    loop: true, 
+    align: "start",
+    // 1. Decrease movement speed (Higher number = Slower transition)
+    // Default is 25. Setting it to 40-50 makes it much smoother and slower.
+    duration: 45, 
+    // 2. Ensure it scrolls exactly one card at a time
+    slidesToScroll: 1 
+  }, [
+    // 3. Increase delay to let users read the card before it moves (e.g., 5000ms)
+    Autoplay({ delay: 4000, stopOnInteraction: true })
   ]);
 
   const services = [
