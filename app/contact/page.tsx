@@ -42,14 +42,15 @@ export default function ContactPage() {
     +966 54 210 0371
   </a>
 </Card>
-<Card className="p-6 text-center hover:shadow-lg transition-shadow">
+<Card className="p-6 px-2 text-center hover:shadow-lg transition-shadow">
   <div className="flex justify-center mb-4">
     <Mail className="w-8 h-8 text-primary" />
   </div>
   <h3 className="font-bold text-lg mb-2 text-foreground">البريد الإلكتروني</h3>
   <a
     href="mailto:shroukamr29072006@gmail.com"
-    className="text-primary hover:text-primary-light transition-colors block break-all"
+    className="text-primary hover:text-primary-light transition-colors block text-sm truncate px-1"
+    title="shroukamr29072006@gmail.com"
   >
     shroukamr29072006@gmail.com
   </a>
