@@ -51,7 +51,7 @@ export default function Services() {
       role: "عميل تجاري",
       text: "تجربة رائعة، السعر منافس جداً مقارنة بجودة الخدمة المقدمة. شكراً لفريق العمل على مجهودهم.",
     },
-    {
+     {
       name: "أحمد محمد",
       role: "عميل سكني",
       text: "خدمة ممتازة وفريق محترف جداً. تم نقل الأثاث بكل حرص وبدون أي أضرار. أنصح بالتعامل معهم بشدة.",
@@ -65,8 +65,7 @@ export default function Services() {
       name: "فيصل العتيبي",
       role: "عميل تجاري",
       text: "تجربة رائعة، السعر منافس جداً مقارنة بجودة الخدمة المقدمة. شكراً لفريق العمل على مجهودهم.",
-    },
-    {
+    }, {
       name: "أحمد محمد",
       role: "عميل سكني",
       text: "خدمة ممتازة وفريق محترف جداً. تم نقل الأثاث بكل حرص وبدون أي أضرار. أنصح بالتعامل معهم بشدة.",
@@ -119,4 +118,42 @@ export default function Services() {
 
       {/* 2. Testimonials Section (Fixed Carousel) */}
       <section className="py-16 md:py-24 bg-muted/30" dir="rtl">
-        <div className="container mx
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+            آراء عملائنا
+          </h2>
+
+          <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
+            <div className="flex">
+              {testimonials.map((t, index) => (
+                <div
+                  key={index}
+                  className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.33%] px-4 group"
+                >
+                  <Card className="h-full border-none shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]">
+                    <CardContent className="p-8 flex flex-col items-center text-center">
+                      <div className="bg-primary/10 p-3 rounded-full mb-4">
+                        <Quote className="w-6 h-6 text-primary rotate-180" />
+                      </div>
+                      <p className="text-muted-foreground mb-6 italic">
+                        "{t.text}"
+                      </p>
+                      <div className="mt-auto">
+                        <h4 className="font-bold text-foreground">{t.name}</h4>
+                        <p className="text-sm text-primary">{t.role}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse">
+            تتحرك البطاقات تلقائياً، أو يمكنك السحب للمشاهدة
+          </p>
+        </div>
+      </section>
+    </div>
+  );
+}
