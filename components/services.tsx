@@ -7,29 +7,18 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function Services() {
-  // 1. Logic Fix: Set 'align' to 'start' to prevent floating gaps
-  /* const [emblaRef] = useEmblaCarousel({ 
+  // --- Carousel Configuration ---
+  const [emblaRef] = useEmblaCarousel({ 
     dir: "rtl", 
     loop: true, 
-    align: "start" 
-  }, [
-    Autoplay({ delay: 3000, stopOnInteraction: true })
-  ]); */
-
-  const [emblaRef] = useEmblaCarousel({ 
-    dir: "ltr", 
-    loop: true, 
     align: "start",
-    // 1. Decrease movement speed (Higher number = Slower transition)
-    // Default is 25. Setting it to 40-50 makes it much smoother and slower.
-    duration: 60, 
-    // 2. Ensure it scrolls exactly one card at a time
-    slidesToScroll: 1 
+    duration: 45,       // Slower, smoother movement
+    slidesToScroll: 1   // Move exactly one card at a time
   }, [
-    // 3. Increase delay to let users read the card before it moves (e.g., 5000ms)
-    Autoplay({ delay: 5000, stopOnInteraction: false })
+    Autoplay({ delay: 5000, stopOnInteraction: true })
   ]);
 
+  // --- Data ---
   const services = [
     { icon: Truck, title: "نقل آمن", description: "نقل آمن وموثوق لأثاثك مع فريق محترف" },
     { icon: Package, title: "تغليف احترافي", description: "تغليف عالي الجودة لحماية أثاثك أثناء النقل" },
@@ -38,61 +27,96 @@ export default function Services() {
   ];
 
   const testimonials = [
-    { name: "أحمد محمد", role: "عميل سكني", text: "خدمة ممتازة وفريق محترف جداً. تم نقل الأثاث بكل حرص وبدون أي أضرار." },
-    { name: "سارة خالد", role: "صاحبة متجر", text: "التزام تام بالمواعيد وسرعة في الإنجاز. التغليف كان متقناً." },
-    { name: "فيصل العتيبي", role: "عميل تجاري", text: "تجربة رائعة، السعر منافس جداً مقارنة بجودة الخدمة المقدمة." },
-    { name: "خالد منصور", role: "عميل سكني", text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل." },
-    { name: "أحمد محمد", role: "عميل سكني", text: "خدمة ممتازة وفريق محترف جداً. تم نقل الأثاث بكل حرص وبدون أي أضرار." },
-    { name: "سارة خالد", role: "صاحبة متجر", text: "التزام تام بالمواعيد وسرعة في الإنجاز. التغليف كان متقناً." },
-    { name: "فيصل العتيبي", role: "عميل تجاري", text: "تجربة رائعة، السعر منافس جداً مقارنة بجودة الخدمة المقدمة." },
-    { name: "خالد منصور", role: "عميل سكني", text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل." },
+    { 
+      name: "أحمد محمد", 
+      role: "عميل سكني", 
+      image: "https://ui-avatars.com/api/?name=A&background=0D9488&color=fff", 
+      text: "خدمة ممتازة وفريق محترف جداً. تم نقل الأثاث بكل حرص وبدون أي أضرار." 
+    },
+    { 
+      name: "سارة خالد", 
+      role: "صاحبة متجر", 
+      image: "https://ui-avatars.com/api/?name=S&background=0D9488&color=fff", 
+      text: "التزام تام بالمواعيد وسرعة في الإنجاز. التغليف كان متقناً وحمى القطع الزجاجية تماماً." 
+    },
+    { 
+      name: "فيصل العتيبي", 
+      role: "عميل تجاري", 
+      image: "https://ui-avatars.com/api/?name=F&background=0D9488&color=fff", 
+      text: "تجربة رائعة، السعر منافس جداً مقارنة بجودة الخدمة المقدمة. شكراً لفريق العمل." 
+    },
+    { 
+      name: "خالد منصور", 
+      role: "عميل سكني", 
+      image: "https://ui-avatars.com/api/?name=K&background=0D9488&color=fff", 
+      text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل وحرص شديد." 
+    },
   ];
 
   return (
-    <div className="space-y-20">
-      {/* Services Grid */}
+    <div className="space-y-0">
+      {/* 1. Services Section */}
       <section id="services" className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">خدماتنا</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+            خدماتنا
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
-                <div className="flex justify-center mb-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <service.icon className="w-8 h-8 text-primary" />
+              <div key={index} className="transform transition-all duration-500 hover:-translate-y-2">
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/10">
+                  <div className="flex justify-center mb-4">
+                    <div className="p-3 bg-primary/10 rounded-lg">
+                      <service.icon className="w-8 h-8 text-primary" />
+                    </div>
                   </div>
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-center text-foreground">{service.title}</h3>
-                <p className="text-center text-muted-foreground">{service.description}</p>
-              </Card>
+                  <h3 className="text-xl font-bold mb-2 text-center text-foreground">{service.title}</h3>
+                  <p className="text-center text-muted-foreground">{service.description}</p>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Carousel */}
+      {/* 2. Testimonials Section */}
       <section className="py-16 md:py-24 bg-muted/30" dir="rtl">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">آراء عملائنا</h2>
-          
-          <div className="overflow-hidden" ref={emblaRef}>
-            {/* 2. Container Fix: -mr-4 offsets the pr-4 on slides for perfect edge alignment */}
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+            آراء عملائنا
+          </h2>
+
+          <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
             <div className="flex -mr-4">
               {testimonials.map((t, index) => (
                 <div
                   key={index}
-                  // 3. Slide Width Fix: Set exactly 33.333% for desktop
-                  className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] pr-4"
+                  className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] pr-4 group"
                 >
-                  <Card className="h-full border-none shadow-md transition-all duration-300">
+                  <Card className="h-full border-none shadow-md transition-all duration-300 group-hover:shadow-xl">
                     <CardContent className="p-8 flex flex-col items-center text-center">
-                      <div className="bg-primary/10 p-3 rounded-full mb-4">
-                        <Quote className="w-6 h-6 text-primary rotate-180" />
+                      
+                      {/* Avatar & Icon Badge */}
+                      <div className="relative mb-6">
+                        <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/10">
+                          <img 
+                            src={t.image} 
+                            alt={t.name} 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 bg-primary p-1.5 rounded-full shadow-lg">
+                          <Quote className="w-3 h-3 text-white rotate-180" />
+                        </div>
                       </div>
-                      <p className="text-muted-foreground mb-6 italic">"{t.text}"</p>
+
+                      <p className="text-muted-foreground mb-6 italic leading-relaxed">
+                        "{t.text}"
+                      </p>
+
                       <div className="mt-auto">
-                        <h4 className="font-bold text-foreground">{t.name}</h4>
-                        <p className="text-sm text-primary">{t.role}</p>
+                        <h4 className="font-bold text-foreground text-lg">{t.name}</h4>
+                        <p className="text-sm text-primary font-medium">{t.role}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -100,12 +124,12 @@ export default function Services() {
               ))}
             </div>
           </div>
-          <p className="text-center text-sm text-muted-foreground mt-8">تتحرك البطاقات تلقائياً، أو يمكنك السحب للمشاهدة</p>
+
+          <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse">
+            تتحرك البطاقات تلقائياً، أو يمكنك السحب للمشاهدة
+          </p>
         </div>
       </section>
     </div>
   );
 }
-//align: "start": By default, carousels often try to "center" a single card, which leaves massive white spaces on the sides. Setting this to start forces the cards to fill from the right (in RTL). 
-// lg:flex-[0_0_33.333%]: This tells the browser that on large screens, each slide must occupy exactly one-third of the available space.
-//flex -mr-4 with pr-4: This is a standard CSS pattern. The negative margin on the parent "pulls" the slides to the edges of your container, while the padding on the slides themselves creates the internal gap between the cards.
