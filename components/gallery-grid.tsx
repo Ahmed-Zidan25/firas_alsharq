@@ -124,7 +124,21 @@ export default function GalleryGrid() {
       type: "video", // Identify as video
       title: "نقل أثاث فاخر",
       description: "استخدام الرافعات المتطورة لنقل الأثاث",
-      src: "/videos/vid1.mp4", // Path to your mp4
+      src: "https://2xhg3peni5noax6x.public.blob.vercel-storage.com/Vid1.mp4", // Path to your mp4
+      //thumbnail: "/images/img-20251202-wa0009.jpg", // Image to show before play
+    },
+    { id: 20,
+      type: "video", // Identify as video
+      title: "نقل أثاث فاخر",
+      description: "استخدام الرافعات المتطورة لنقل الأثاث",
+      src: "https://2xhg3peni5noax6x.public.blob.vercel-storage.com/Vid2.mp4", // Path to your mp4
+      //thumbnail: "/images/img-20251202-wa0009.jpg", // Image to show before play
+    },
+    { id: 21,
+      type: "video", // Identify as video
+      title: "نقل أثاث فاخر",
+      description: "استخدام الرافعات المتطورة لنقل الأثاث",
+      src: "https://2xhg3peni5noax6x.public.blob.vercel-storage.com/Vid3.mp4", // Path to your mp4
       //thumbnail: "/images/img-20251202-wa0009.jpg", // Image to show before play
     },
   ]
