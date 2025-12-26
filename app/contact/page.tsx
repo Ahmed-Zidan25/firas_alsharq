@@ -3,9 +3,9 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
-// Added all necessary sub-components to the import
+
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
-import SocialMedia from "@/components/social-media"
+
 
 export const metadata = {
   title: "تواصل معنا - فراس الشرق",
@@ -104,6 +104,7 @@ export default function ContactPage() {
             </Card>
           </div>
         </div>
+        
       </section>
 
       <Footer />
