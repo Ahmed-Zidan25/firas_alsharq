@@ -10,83 +10,83 @@ export default function GalleryGrid() {
   const galleryImages = [
   
     {
-      id: 1,
+     id: 1,
       title: "نقل أثاث فاخر",
       description: "نقل أثاث بحذر واحترافية",
-      image: "/images/img-20251202-wa0009.jpg",
+      src: "/images/img-20251202-wa0009.jpg",
     },
     {
       id: 2,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/img-20251202-wa0018.jpg",
+      src: "/images/img-20251202-wa0018.jpg",
     },
 
     {
       id: 3,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/10.jpeg",
+      src: "/images/10.jpeg",
     },
     {
       id: 4,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/11.jpeg",
+      src: "/images/11.jpeg",
     },
     {
       id: 5,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/12.jpeg",
+      src: "/images/12.jpeg",
     },
     {
       id: 6,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/13.jpeg",
+      src: "/images/13.jpeg",
     },
     {
       id: 7,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/14.jpeg",
+      src: "/images/14.jpeg",
     },
     {
       id: 8,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/15.jpeg",
+      src: "/images/15.jpeg",
     },
     {
       id: 9,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/16.jpeg",
+      src: "/images/16.jpeg",
     },
     {
       id: 10,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/17.jpeg",
+      src: "/images/17.jpeg",
     },
     {
       id: 11,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/17.jpeg",
+      src: "/images/17.jpeg",
     },
     {
       id: 12,
       title: "تغليف احترافي",
       description: "تغليف عالي الجودة لحماية الأثاث",
-      image: "/images/19.jpeg",
+      src: "/images/19.jpeg",
     },
      {
       id: 13,
       title: "شاحنات نقل حديثة",
       description: "أسطول معدات حديثة وآمنة",
-      image: "/images/img-20251202-wa0021.jpg",
+      src: "/images/img-20251202-wa0021.jpg",
     },
 
 
@@ -94,31 +94,31 @@ export default function GalleryGrid() {
       id: 14,
       title: "فريق النقل المحترف",
       description: "فريقنا المدرب والخبير",
-      image: "/images/img-20251202-wa0011.jpg",
+      src: "/images/img-20251202-wa0011.jpg",
     },
     {
       id: 15,
       title: "شاحنات نقل حديثة",
       description: "أسطول معدات حديثة وآمنة",
-      image: "/images/img-20251202-wa0021.jpg",
+      src: "/images/img-20251202-wa0021.jpg",
     },
     {
       id: 16,
       title: "خدمة التغليف",
       description: "تغليف احترافي وآمن",
-      image: "/images/img-20251207-wa0004.jpg",
+      src: "/images/img-20251207-wa0004.jpg",
     },
     {
       id: 17,
       title: "فرش واستقرار",
       description: "فرش احترافي بعد النقل",
-      image: "/images/img-20251207-wa0008.jpg",
+      src: "/images/img-20251207-wa0008.jpg",
     },
     {
       id: 18,
       title: "نقل آمن",
       description: "أثناء عملية النقل الآمن",
-      image: "/images/img-20251202-wa0025.jpg",
+      src: "/images/img-20251202-wa0025.jpg",
     },
      { id: 19,
       type: "video", // Identify as video
@@ -143,7 +143,7 @@ export default function GalleryGrid() {
     },
   ]
 
-  return (
+ return (
     <div>
       {/* Gallery Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
