@@ -72,43 +72,45 @@ export default function ContactPage() {
               <p className="text-muted-foreground text-sm">24 ساعة / 7 أيام بالأسبوع</p>
             </Card>
           </div>
-            <div className="mb-20">
+          
+
+
+        </div>
+
+  <div className="mb-20">
           <Card className="border-border">
             <CardHeader>
              <CardTitle className="text-gray-800 flex items-center space-x-2">
               <MapPin className="h-5 w-5 text-red-600" />
-              <span>Find Us</span>
+              <span>موقعنا</span>
             </CardTitle>
   
-              <CardDescription>Our head office location in Cairo, Egypt</CardDescription>
+              <CardDescription>موقع مكتبنا بحي المروة - جدة - المملكة العربية السعودية</CardDescription>
             </CardHeader>
             <CardContent>
             {/* The interactive map is embedded here using an iframe. */}
             <div className="aspect-[21/9] rounded-xl overflow-hidden shadow-xl">
-              <iframe
-                // The source uses the specified address for accurate pinning
-                src="https://maps.google.com/maps?q=100%20Al%20Merghani,%20Al%20Golf,%20Nasr%20City,%20Cairo%20Governorate%204451426,%20Egypt&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Delta Foodstuffs Office Location"
-              ></iframe>
-            </div>
-            
+  <iframe
+    // Updated src with coordinates and place name for Al Rajhi Bank, Jeddah
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3709.643328574136!2d39.12337381165245!3d21.607562480572242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3da45ab0ec8bf%3A0xc7cbc8ae8b97776d!2z2YXYtdix2YEg2KfZhNix2KfYrNit2YogfCBhbHJhamhpIGJhbms!5e0!3m2!1sen!2ssa!4v1715800000000!5m2!1sen!2ssa"
+    width="100%"
+    height="100%"
+    style={{ border: 0 }}
+    allowFullScreen={true}
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+    title="بنك الراجحي - شارع حراء"
+  ></iframe>
+</div>
             {/* Displaying the physical address for clarity */}
             <p className="text-sm text-gray-600 mt-4 flex items-center justify-center sm:justify-start">
                 <MapPin className="h-4 w-4 text-teal-600 mr-2" />
-                100 Merghany st., Masr El Gedida, Cairo, Egypt
+                حى المروه، شارع حراء، جده، بجوار بنك الراجحي، المملكة العربية السعودية
             </p>
           </CardContent>
           </Card>
         </div> 
 
-
-        </div>
       </section>
 
       {/* Social Media Section */}
