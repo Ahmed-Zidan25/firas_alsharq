@@ -1,7 +1,7 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
-import { Card } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 
 export const metadata = {
