@@ -94,7 +94,8 @@ export default function ContactPage() {
             <div className="aspect-[21/9] rounded-xl overflow-hidden shadow-xl">
   <iframe
     // Updated src with coordinates and place name for Al Rajhi Bank, Jeddah
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3709.643328574136!2d39.12337381165245!3d21.607562480572242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3da45ab0ec8bf%3A0xc7cbc8ae8b97776d!2z2YXYtdix2YEg2KfZhNix2KfYrNit2YogfCBhbHJhamhpIGJhbms!5e0!3m2!1sen!2ssa!4v1715800000000!5m2!1sen!2ssa"
+   // src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3709.643328574136!2d39.12337381165245!3d21.607562480572242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3da45ab0ec8bf%3A0xc7cbc8ae8b97776d!2z2YXYtdix2YEg2KfZhNix2KfYrNit2YogfCBhbHJhamhpIGJhbms!5e0!3m2!1sen!2ssa!4v1715800000000!5m2!1sen!2ssa"
+   src="https://maps.google.com/maps?q=100%20Al%20Merghani,%20Al%20Golf,%20Nasr%20City,%20Cairo%20Governorate%204451426,%20Egypt&t=&z=15&ie=UTF8&iwloc=&output=embed"
     width="100%"
     height="100%"
     style={{ border: 0 }}
