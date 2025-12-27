@@ -9,6 +9,17 @@ import Autoplay from "embla-carousel-autoplay";
 export default function Services() {
   const [isMounted, setIsMounted] = useState(false);
 
+  // --- Carousel Configuration ---
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    dir: "rtl", 
+    loop: true, 
+    align: "start",
+    duration: 25,
+    slidesToScroll: 1
+  }, [
+    Autoplay({ delay: 5000, stopOnInteraction: false })
+  ]);
+
   // --- Data ---
   const services = [
     { icon: Truck, title: "نقل آمن", description: "نقل آمن وموثوق لأثاثك مع فريق محترف" },
@@ -45,7 +56,7 @@ export default function Services() {
     { 
       name: "أحمد أبوليلة", 
       role: "عميل تجاري", 
-      image: "https://ui-avatars.com/api/?name=A&background=0D9488&color=fff", 
+      image: "https://ui-avatars.com/api/?name=Ab&background=0D9488&color=fff", 
       text: "تجربة رائعة، السعر منافس جداً مقارنة بجودة الخدمة المقدمة. شكراً لفريق العمل." 
     },
     { 
@@ -56,29 +67,19 @@ export default function Services() {
     },
   ];
 
-  // --- Carousel Configuration ---
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    dir: "rtl", 
-    loop: true, 
-    align: "start",
-    duration: 25,
-    slidesToScroll: 1
-  }, [
-    Autoplay({ delay: 5000, stopOnInteraction: false })
-  ]);
-
-  // Set mounted state
+  // 1. Set mounted state to force a fresh render on the client
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Force re-init when mounted OR when testimonials change
+  // 2. Force Embla to recalculate slides specifically when the 6 items are loaded
   useEffect(() => {
     if (isMounted && emblaApi) {
       emblaApi.reInit();
     }
   }, [isMounted, emblaApi, testimonials]);
 
+  // Prevent server-side render of the carousel to avoid cached layouts
   if (!isMounted) return null;
 
   return (
@@ -91,7 +92,7 @@ export default function Services() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
-              <div key={index} className="transform transition-all duration-500 hover:-translate-y-2">
+              <div key={`service-${index}`} className="transform transition-all duration-500 hover:-translate-y-2">
                 <Card className="p-6 hover:shadow-lg transition-shadow border-primary/10">
                   <div className="flex justify-center mb-4">
                     <div className="p-3 bg-primary/10 rounded-lg">
@@ -115,12 +116,11 @@ export default function Services() {
           </h2>
 
           <div className="overflow-hidden touch-pan-y" ref={emblaRef}>
-            {/* FIX: Negative margin -ml-4 on container pulls slides flush with the edge */}
+            {/* FIX: -ml-4 on container pulls slides flush with the edge in RTL */}
             <div className="flex -ml-4">
               {testimonials.map((t, index) => (
                 <div
-                  key={`testimonial-${index}`}
-                  // FIX: pl-4 on slide provides the internal gap
+                  key={`testimonial-v2-${index}`} // Unique key to force React to render new items
                   className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pl-4"
                 >
                   <Card className="h-full border-none shadow-md transition-all duration-300 hover:shadow-xl mx-1">
@@ -155,7 +155,7 @@ export default function Services() {
           </div>
 
           <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse">
-            تتحرك البطاقات تلقائياً، أو يمكنك السحب للمشاهدة
+             {testimonials.length} آراء متاحة - اسحب للمشاهدة
           </p>
         </div>
       </section>
