@@ -8,17 +8,21 @@ import Autoplay from "embla-carousel-autoplay";
 
 export default function Services() {
   // --- Carousel Configuration ---
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    dir: "rtl", 
-    loop: true, 
-    align: "center",  // Try changing this to "center" for mobile if "start" cuts off cards
-    duration: 45,       // Slower, smoother movement
-    slidesToScroll: 1   // Move exactly one card at a time
-  }, [
-    Autoplay({ delay: 5000, stopOnInteraction: true })
-  ]);// Add this useEffect to ensure it re-aligns on mount
+const [emblaRef, emblaApi] = useEmblaCarousel({
+  dir: "rtl", 
+  loop: true, 
+  align: "start",
+  duration: 25, 
+  slidesToScroll: 1
+}, [
+  Autoplay({ delay: 5000, stopOnInteraction: true })
+]);
+
+// This is the "Used" part - it fixes the Vercel/Next.js hydration gaps
 React.useEffect(() => {
-  if (emblaApi) emblaApi.reInit();
+  if (emblaApi) {
+    emblaApi.reInit();
+  }
 }, [emblaApi]);
 
   // --- Data ---
@@ -53,7 +57,8 @@ React.useEffect(() => {
       role: "عميل سكني", 
       image: "https://ui-avatars.com/api/?name=K&background=0D9488&color=fff", 
       text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل وحرص شديد." 
-    },{ 
+    },
+    { 
       name: "أحمد أبوليلة", 
       role: "عميل تجاري", 
       image: "https://ui-avatars.com/api/?name=F&background=0D9488&color=fff", 
@@ -64,7 +69,7 @@ React.useEffect(() => {
       role: "عميل سكني", 
       image: "https://ui-avatars.com/api/?name=K&background=0D9488&color=fff", 
       text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل وحرص شديد." 
-    },
+    }
   ];
 
   return (
@@ -94,21 +99,26 @@ React.useEffect(() => {
       </section>
 
       {/* 2. Testimonials Section */}
-      <section className="py-16 md:py-24 bg-muted/30" dir="rtl">
+      {/* 2. Testimonials Section */}
+<section className="py-16 md:py-24 bg-muted/30" dir="rtl">
   <div className="container mx-auto px-4 overflow-hidden">
     <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
       آراء عملائنا
     </h2>
 
     {/* The Viewport */}
-    <div className="overflow-hidden touch-pan-y" ref={emblaRef}>
-      {/* The Container - Use 'gap' instead of negative margins for cleaner math */}
-      <div className="flex">
+    <div className="overflow-hidden" ref={emblaRef}>
+      {/* FIX: Added -mr-4 here to offset the slide padding. 
+         This removes the "dead space" on the sides of the desktop view.
+      */}
+      <div className="flex -mr-4">
         {testimonials.map((t, index) => (
           <div
             key={index}
-            // Mobile: 100% width, Tablet: 50%, Desktop: 33.33%
-            className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-2 md:px-3"
+            /* FIX: Added pr-4 for spacing. 
+               min-w-0 is vital to prevent the card from expanding based on text length.
+            */
+            className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pr-4"
           >
             <Card className="h-full border-none shadow-md transition-all duration-300 hover:shadow-xl">
               <CardContent className="p-6 md:p-8 flex flex-col items-center text-center h-full">
