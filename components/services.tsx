@@ -51,7 +51,7 @@ export default function Services() {
     { 
       name: "مصطفي المغازي", 
       role: "عميل سكني", 
-      image: "https://ui-avatars.com/api/?name=K&background=0D9488&color=fff", 
+      image: "https://ui-avatars.com/api/?name=M&background=0D9488&color=fff", 
       text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل وحرص شديد." 
     },
   ];
@@ -67,12 +67,12 @@ export default function Services() {
     Autoplay({ delay: 5000, stopOnInteraction: false })
   ]);
 
-  // Ensure component is mounted to prevent hydration mismatches
+  // Set mounted state
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Force Embla to recognize all slides (especially after Vercel deployment)
+  // Force re-init when mounted OR when testimonials change
   useEffect(() => {
     if (isMounted && emblaApi) {
       emblaApi.reInit();
@@ -86,7 +86,7 @@ export default function Services() {
       {/* 1. Services Section */}
       <section id="services" className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground font-arabic">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
             خدماتنا
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -98,8 +98,8 @@ export default function Services() {
                       <service.icon className="w-8 h-8 text-primary" />
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-center text-foreground font-arabic">{service.title}</h3>
-                  <p className="text-center text-muted-foreground font-arabic">{service.description}</p>
+                  <h3 className="text-xl font-bold mb-2 text-center text-foreground">{service.title}</h3>
+                  <p className="text-center text-muted-foreground">{service.description}</p>
                 </Card>
               </div>
             ))}
@@ -110,19 +110,17 @@ export default function Services() {
       {/* 2. Testimonials Section */}
       <section className="py-16 md:py-24 bg-muted/30" dir="rtl">
         <div className="container mx-auto px-4 overflow-hidden">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground font-arabic">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
             آراء عملائنا
           </h2>
 
           <div className="overflow-hidden touch-pan-y" ref={emblaRef}>
-            {/* FIX: -ml-4 on container pulls the items together.
-                pl-4 on slides creates the gap.
-                This prevents the "missing cards" and "extra space" bugs in RTL.
-            */}
+            {/* FIX: Negative margin -ml-4 on container pulls slides flush with the edge */}
             <div className="flex -ml-4">
               {testimonials.map((t, index) => (
                 <div
                   key={`testimonial-${index}`}
+                  // FIX: pl-4 on slide provides the internal gap
                   className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pl-4"
                 >
                   <Card className="h-full border-none shadow-md transition-all duration-300 hover:shadow-xl mx-1">
@@ -141,13 +139,13 @@ export default function Services() {
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground mb-6 italic leading-relaxed text-sm md:text-base font-arabic">
+                      <p className="text-muted-foreground mb-6 italic leading-relaxed text-sm md:text-base">
                         "{t.text}"
                       </p>
 
                       <div className="mt-auto">
-                        <h4 className="font-bold text-foreground text-lg font-arabic">{t.name}</h4>
-                        <p className="text-sm text-primary font-medium font-arabic">{t.role}</p>
+                        <h4 className="font-bold text-foreground text-lg">{t.name}</h4>
+                        <p className="text-sm text-primary font-medium">{t.role}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -156,7 +154,7 @@ export default function Services() {
             </div>
           </div>
 
-          <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse font-arabic">
+          <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse">
             تتحرك البطاقات تلقائياً، أو يمكنك السحب للمشاهدة
           </p>
         </div>
