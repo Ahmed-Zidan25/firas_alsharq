@@ -12,7 +12,7 @@ const [emblaRef, emblaApi] = useEmblaCarousel({
   dir: "rtl", 
   loop: true, 
   align: "start",
-  duration: 25, 
+  duration: 20, 
   slidesToScroll: 1
 }, [
   Autoplay({ delay: 5000, stopOnInteraction: true })
@@ -61,14 +61,14 @@ React.useEffect(() => {
     { 
       name: "أحمد أبوليلة", 
       role: "عميل تجاري", 
-      image: "https://ui-avatars.com/api/?name=F&background=0D9488&color=fff", 
-      text: "تجربة رائعة، السعر منافس جداً مقارنة بجودة الخدمة المقدمة. شكراً لفريق العمل." 
+      image: "https://ui-avatars.com/api/?name=A&background=0D9488&color=fff", 
+      text: "شكراً لفريق العمل." 
     },
     { 
       name: "مصطفي المغازي", 
       role: "عميل سكني", 
       image: "https://ui-avatars.com/api/?name=K&background=0D9488&color=fff", 
-      text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل وحرص شديد." 
+      text: "دقة وأمانة في التعامل وحرص شديد." 
     }
   ];
 
@@ -99,26 +99,25 @@ React.useEffect(() => {
       </section>
 
       {/* 2. Testimonials Section */}
-      {/* 2. Testimonials Section */}
+     {/* 2. Testimonials Section */}
 <section className="py-16 md:py-24 bg-muted/30" dir="rtl">
   <div className="container mx-auto px-4 overflow-hidden">
     <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
       آراء عملائنا
     </h2>
 
-    {/* The Viewport */}
     <div className="overflow-hidden" ref={emblaRef}>
-      {/* FIX: Added -mr-4 here to offset the slide padding. 
-         This removes the "dead space" on the sides of the desktop view.
+      {/* FIX 1: Change flex to 'flex -ml-4' 
+         This pulls the slides together to eliminate the desktop gap.
       */}
-      <div className="flex -mr-4">
+      <div className="flex -ml-4">
         {testimonials.map((t, index) => (
           <div
             key={index}
-            /* FIX: Added pr-4 for spacing. 
-               min-w-0 is vital to prevent the card from expanding based on text length.
+            /* FIX 2: Use 'pl-4' for the gap and 'min-w-0' to prevent text expansion.
+               This ensures 1 card on mobile and exactly 3 on desktop.
             */
-            className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pr-4"
+            className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pl-4"
           >
             <Card className="h-full border-none shadow-md transition-all duration-300 hover:shadow-xl">
               <CardContent className="p-6 md:p-8 flex flex-col items-center text-center h-full">
@@ -150,10 +149,6 @@ React.useEffect(() => {
         ))}
       </div>
     </div>
-
-    <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse">
-      تتحرك البطاقات تلقائياً، أو يمكنك السحب للمشاهدة
-    </p>
   </div>
 </section>
     </div>
