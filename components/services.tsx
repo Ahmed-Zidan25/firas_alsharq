@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Truck, Package, Clock, Users, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import useEmblaCarousel from "embla-carousel-react";
@@ -8,17 +8,6 @@ import Autoplay from "embla-carousel-autoplay";
 
 export default function Services() {
   const [isMounted, setIsMounted] = useState(false);
-
-  // --- Carousel Configuration ---
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    dir: "rtl", 
-    loop: true, 
-    align: "start",
-    duration: 25,
-    slidesToScroll: 1
-  }, [
-    Autoplay({ delay: 5000, stopOnInteraction: false })
-  ]);
 
   // --- Data ---
   const services = [
@@ -57,29 +46,37 @@ export default function Services() {
       name: "أحمد أبوليلة", 
       role: "عميل تجاري", 
       image: "https://ui-avatars.com/api/?name=Ab&background=0D9488&color=fff", 
-      text: "تجربة رائعة، السعر منافس جداً مقارنة بجودة الخدمة المقدمة. شكراً لفريق العمل." 
+      text: "خدمة احترافية جداً، تم التعامل مع المعدات المكتبية بدقة عالية." 
     },
     { 
       name: "مصطفي المغازي", 
       role: "عميل سكني", 
       image: "https://ui-avatars.com/api/?name=M&background=0D9488&color=fff", 
-      text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل وحرص شديد." 
+      text: "سرعة استجابة مذهلة وأسعار شفافة بدون تكاليف مخفية." 
     },
   ];
 
-  // 1. Set mounted state to force a fresh render on the client
+  // --- Carousel Configuration ---
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    dir: "rtl", 
+    loop: true, 
+    align: "start",
+    duration: 25,
+    slidesToScroll: 1
+  }, [
+    Autoplay({ delay: 5000, stopOnInteraction: false })
+  ]);
+
+  // Set mounted state
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // 2. Force Embla to recalculate slides specifically when the 6 items are loaded
+  // Force re-init whenever the API becomes available
   useEffect(() => {
-    if (isMounted && emblaApi) {
-      emblaApi.reInit();
-    }
-  }, [isMounted, emblaApi, testimonials]);
+    if (emblaApi) emblaApi.reInit();
+  }, [emblaApi]);
 
-  // Prevent server-side render of the carousel to avoid cached layouts
   if (!isMounted) return null;
 
   return (
@@ -87,7 +84,7 @@ export default function Services() {
       {/* 1. Services Section */}
       <section id="services" className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground font-arabic">
             خدماتنا
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -99,8 +96,8 @@ export default function Services() {
                       <service.icon className="w-8 h-8 text-primary" />
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-center text-foreground">{service.title}</h3>
-                  <p className="text-center text-muted-foreground">{service.description}</p>
+                  <h3 className="text-xl font-bold mb-2 text-center text-foreground font-arabic">{service.title}</h3>
+                  <p className="text-center text-muted-foreground font-arabic">{service.description}</p>
                 </Card>
               </div>
             ))}
@@ -111,16 +108,22 @@ export default function Services() {
       {/* 2. Testimonials Section */}
       <section className="py-16 md:py-24 bg-muted/30" dir="rtl">
         <div className="container mx-auto px-4 overflow-hidden">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground font-arabic">
             آراء عملائنا
           </h2>
 
-          <div className="overflow-hidden touch-pan-y" ref={emblaRef}>
-            {/* FIX: -ml-4 on container pulls slides flush with the edge in RTL */}
+          {/* THE FIX: By using 'key={testimonials.length}', we force React 
+              to re-render the entire carousel if the array size is 6.
+          */}
+          <div 
+            className="overflow-hidden touch-pan-y" 
+            ref={emblaRef} 
+            key={testimonials.length} 
+          >
             <div className="flex -ml-4">
               {testimonials.map((t, index) => (
                 <div
-                  key={`testimonial-v2-${index}`} // Unique key to force React to render new items
+                  key={`testimonial-final-${index}`}
                   className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pl-4"
                 >
                   <Card className="h-full border-none shadow-md transition-all duration-300 hover:shadow-xl mx-1">
@@ -139,13 +142,13 @@ export default function Services() {
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground mb-6 italic leading-relaxed text-sm md:text-base">
+                      <p className="text-muted-foreground mb-6 italic leading-relaxed text-sm md:text-base font-arabic">
                         "{t.text}"
                       </p>
 
                       <div className="mt-auto">
-                        <h4 className="font-bold text-foreground text-lg">{t.name}</h4>
-                        <p className="text-sm text-primary font-medium">{t.role}</p>
+                        <h4 className="font-bold text-foreground text-lg font-arabic">{t.name}</h4>
+                        <p className="text-sm text-primary font-medium font-arabic">{t.role}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -154,8 +157,8 @@ export default function Services() {
             </div>
           </div>
 
-          <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse">
-             {testimonials.length} آراء متاحة - اسحب للمشاهدة
+          <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse font-arabic">
+            {testimonials.length} آراء - اسحب يميناً أو يساراً للمشاهدة
           </p>
         </div>
       </section>
