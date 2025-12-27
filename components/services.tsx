@@ -37,6 +37,18 @@ export default function Services() {
       text: "سرعة استجابة مذهلة وأسعار شفافة بدون تكاليف مخفية." 
     },
     { 
+      name: "خالد منصور", 
+      role: "عميل سكني", 
+      image: "https://ui-avatars.com/api/?name=K&background=0D9488&color=fff", 
+      text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل وحرص شديد." 
+    },
+     { 
+      name: "أحمد أبوليلة", 
+      role: "عميل تجاري", 
+      image: "https://ui-avatars.com/api/?name=Ab&background=0D9488&color=fff", 
+      text: "خدمة احترافية جداً، تم التعامل مع المعدات المكتبية بدقة عالية." 
+    },
+    { 
       name: "فيصل العتيبي", 
       role: "عميل تجاري", 
       image: "https://ui-avatars.com/api/?name=F&background=0D9488&color=fff", 
