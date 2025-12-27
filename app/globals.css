@@ -151,3 +151,8 @@
   src: url("https://fonts.gstatic.com/s/cairo/v28/SLXgc1cb_tjmIVkJcRP3q2z2-_3XL2zfyMf6Z0S_r8xK1QQ.woff2")
     format("woff2");
 }
+/* Prevents cards from stacking vertically before JS loads */
+.embla__container {
+  display: flex;
+  will-change: transform;
+}

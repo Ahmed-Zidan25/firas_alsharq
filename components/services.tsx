@@ -53,6 +53,17 @@ React.useEffect(() => {
       role: "عميل سكني", 
       image: "https://ui-avatars.com/api/?name=K&background=0D9488&color=fff", 
       text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل وحرص شديد." 
+    },{ 
+      name: "أحمد أبوليلة", 
+      role: "عميل تجاري", 
+      image: "https://ui-avatars.com/api/?name=F&background=0D9488&color=fff", 
+      text: "تجربة رائعة، السعر منافس جداً مقارنة بجودة الخدمة المقدمة. شكراً لفريق العمل." 
+    },
+    { 
+      name: "مصطفي المغازي", 
+      role: "عميل سكني", 
+      image: "https://ui-avatars.com/api/?name=K&background=0D9488&color=fff", 
+      text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل وحرص شديد." 
     },
   ];
 
@@ -84,31 +95,44 @@ React.useEffect(() => {
 
       {/* 2. Testimonials Section */}
       <section className="py-16 md:py-24 bg-muted/30" dir="rtl">
-  <div className="container mx-auto px-4 overflow-hidden"> {/* Added overflow-hidden here */}
+  <div className="container mx-auto px-4 overflow-hidden">
     <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
       آراء عملائنا
     </h2>
 
-    <div className="overflow-hidden touch-pan-y" ref={emblaRef}> {/* Added touch-pan-y for better mobile scrolling */}
-      <div className="flex -mr-4">
+    {/* The Viewport */}
+    <div className="overflow-hidden touch-pan-y" ref={emblaRef}>
+      {/* The Container - Use 'gap' instead of negative margins for cleaner math */}
+      <div className="flex">
         {testimonials.map((t, index) => (
           <div
             key={index}
-            className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] pr-4"
+            // Mobile: 100% width, Tablet: 50%, Desktop: 33.33%
+            className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-2 md:px-3"
           >
-            <Card className="h-full mx-1 border-none shadow-md">
-              <CardContent className="p-6 flex flex-col items-center text-center">
-                <div className="relative mb-4">
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-4 border-primary/10">
-                    <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
+            <Card className="h-full border-none shadow-md transition-all duration-300 hover:shadow-xl">
+              <CardContent className="p-6 md:p-8 flex flex-col items-center text-center h-full">
+                
+                <div className="relative mb-6">
+                  <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/10">
+                    <img 
+                      src={t.image} 
+                      alt={t.name} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 bg-primary p-1.5 rounded-full shadow-lg">
+                    <Quote className="w-3 h-3 text-white rotate-180" />
                   </div>
                 </div>
-                <p className="text-sm md:text-base text-muted-foreground mb-4 italic leading-relaxed">
+
+                <p className="text-muted-foreground mb-6 italic leading-relaxed text-sm md:text-base">
                   "{t.text}"
                 </p>
+
                 <div className="mt-auto">
-                  <h4 className="font-bold text-foreground">{t.name}</h4>
-                  <p className="text-xs text-primary">{t.role}</p>
+                  <h4 className="font-bold text-foreground text-lg">{t.name}</h4>
+                  <p className="text-sm text-primary font-medium">{t.role}</p>
                 </div>
               </CardContent>
             </Card>
@@ -116,6 +140,10 @@ React.useEffect(() => {
         ))}
       </div>
     </div>
+
+    <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse">
+      تتحرك البطاقات تلقائياً، أو يمكنك السحب للمشاهدة
+    </p>
   </div>
 </section>
     </div>
