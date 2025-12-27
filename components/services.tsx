@@ -1,25 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Truck, Package, Clock, Users, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function Services() {
-  // --- Carousel Configuration ---
-const [emblaRef, emblaApi] = useEmblaCarousel({
-  dir: "rtl", 
-  loop: true, 
-  align: "start",
-  }, [Autoplay()]);
- React.useEffect(() => {
-  if (emblaApi) {
-    // This tells Embla: "The data changed, recalculate the 6 cards"
-    emblaApi.reInit();
-  }
-}, [emblaApi, testimonials]);
-
   // --- Data ---
   const services = [
     { icon: Truck, title: "نقل آمن", description: "نقل آمن وموثوق لأثاثك مع فريق محترف" },
@@ -57,22 +44,40 @@ const [emblaRef, emblaApi] = useEmblaCarousel({
       name: "أحمد أبوليلة", 
       role: "عميل تجاري", 
       image: "https://ui-avatars.com/api/?name=A&background=0D9488&color=fff", 
-      text: "شكراً لفريق العمل." 
+      text: "تجربة رائعة، السعر منافس جداً مقارنة بجودة الخدمة المقدمة. شكراً لفريق العمل." 
     },
     { 
       name: "مصطفي المغازي", 
       role: "عميل سكني", 
       image: "https://ui-avatars.com/api/?name=K&background=0D9488&color=fff", 
-      text: "دقة وأمانة في التعامل وحرص شديد." 
-    }
+      text: "أفضل شركة نقل تعاملت معها في جدة، دقة وأمانة في التعامل وحرص شديد." 
+    },
   ];
 
+  // --- Carousel Configuration ---
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    dir: "rtl", 
+    loop: true, 
+    align: "start",
+    duration: 25,
+    slidesToScroll: 1
+  }, [
+    Autoplay({ delay: 5000, stopOnInteraction: false })
+  ]);
+
+  // CRITICAL FIX: This ensures Embla recognizes all 6 cards on mount/update
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.reInit();
+    }
+  }, [emblaApi, testimonials]);
+
   return (
-    <div className="space-y-0">
+    <div className="space-y-0 overflow-x-hidden">
       {/* 1. Services Section */}
       <section id="services" className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground font-arabic">
             خدماتنا
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -94,52 +99,56 @@ const [emblaRef, emblaApi] = useEmblaCarousel({
       </section>
 
       {/* 2. Testimonials Section */}
-     {/* 2. Testimonials Section */}
-<section className="py-16 md:py-24 bg-muted/30" dir="rtl">
-  <div className="container mx-auto px-4 overflow-hidden">
-    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
-      آراء عملائنا
-    </h2>
+      <section className="py-16 md:py-24 bg-muted/30" dir="rtl">
+        <div className="container mx-auto px-4 overflow-hidden">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground font-arabic">
+            آراء عملائنا
+          </h2>
 
-   <div className="overflow-hidden" ref={emblaRef}>
-  <div className="flex -ml-4"> {/* Negative margin pulls all 6 cards into the flex row */}
-    {testimonials.map((t, index) => (
-      <div
-        key={index}
-        className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pl-4"
-      >
-            <Card className="h-full border-none shadow-md transition-all duration-300 hover:shadow-xl">
-              <CardContent className="p-6 md:p-8 flex flex-col items-center text-center h-full">
-                
-                <div className="relative mb-6">
-                  <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/10">
-                    <img 
-                      src={t.image} 
-                      alt={t.name} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 bg-primary p-1.5 rounded-full shadow-lg">
-                    <Quote className="w-3 h-3 text-white rotate-180" />
-                  </div>
+          <div className="overflow-hidden touch-pan-y" ref={emblaRef}>
+            {/* FIX: -ml-4 on container and pl-4 on items creates the perfect RTL gap */}
+            <div className="flex -ml-4">
+              {testimonials.map((t, index) => (
+                <div
+                  key={`${t.name}-${index}`}
+                  className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pl-4"
+                >
+                  <Card className="h-full border-none shadow-md transition-all duration-300 hover:shadow-xl mx-1">
+                    <CardContent className="p-6 md:p-8 flex flex-col items-center text-center h-full">
+                      
+                      <div className="relative mb-6">
+                        <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/10">
+                          <img 
+                            src={t.image} 
+                            alt={t.name} 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 bg-primary p-1.5 rounded-full shadow-lg">
+                          <Quote className="w-3 h-3 text-white rotate-180" />
+                        </div>
+                      </div>
+
+                      <p className="text-muted-foreground mb-6 italic leading-relaxed text-sm md:text-base">
+                        "{t.text}"
+                      </p>
+
+                      <div className="mt-auto">
+                        <h4 className="font-bold text-foreground text-lg">{t.name}</h4>
+                        <p className="text-sm text-primary font-medium">{t.role}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-
-                <p className="text-muted-foreground mb-6 italic leading-relaxed text-sm md:text-base">
-                  "{t.text}"
-                </p>
-
-                <div className="mt-auto">
-                  <h4 className="font-bold text-foreground text-lg">{t.name}</h4>
-                  <p className="text-sm text-primary font-medium">{t.role}</p>
-                </div>
-              </CardContent>
-            </Card>
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
+
+          <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse font-arabic">
+            تتحرك البطاقات تلقائياً، أو يمكنك السحب للمشاهدة
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
