@@ -8,15 +8,18 @@ import Autoplay from "embla-carousel-autoplay";
 
 export default function Services() {
   // --- Carousel Configuration ---
-  const [emblaRef] = useEmblaCarousel({ 
+  const [emblaRef, emblaApi] = useEmblaCarousel({
     dir: "rtl", 
     loop: true, 
-    align: "start",
+    align: "center",  // Try changing this to "center" for mobile if "start" cuts off cards
     duration: 45,       // Slower, smoother movement
     slidesToScroll: 1   // Move exactly one card at a time
   }, [
     Autoplay({ delay: 5000, stopOnInteraction: true })
-  ]);
+  ]);// Add this useEffect to ensure it re-aligns on mount
+React.useEffect(() => {
+  if (emblaApi) emblaApi.reInit();
+}, [emblaApi]);
 
   // --- Data ---
   const services = [
@@ -81,55 +84,40 @@ export default function Services() {
 
       {/* 2. Testimonials Section */}
       <section className="py-16 md:py-24 bg-muted/30" dir="rtl">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
-            آراء عملائنا
-          </h2>
+  <div className="container mx-auto px-4 overflow-hidden"> {/* Added overflow-hidden here */}
+    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+      آراء عملائنا
+    </h2>
 
-          <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
-            <div className="flex -mr-4">
-              {testimonials.map((t, index) => (
-                <div
-                  key={index}
-                  className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] pr-4 group"
-                >
-                  <Card className="h-full border-none shadow-md transition-all duration-300 group-hover:shadow-xl">
-                    <CardContent className="p-8 flex flex-col items-center text-center">
-                      
-                      {/* Avatar & Icon Badge */}
-                      <div className="relative mb-6">
-                        <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/10">
-                          <img 
-                            src={t.image} 
-                            alt={t.name} 
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="absolute -bottom-1 -right-1 bg-primary p-1.5 rounded-full shadow-lg">
-                          <Quote className="w-3 h-3 text-white rotate-180" />
-                        </div>
-                      </div>
-
-                      <p className="text-muted-foreground mb-6 italic leading-relaxed">
-                        "{t.text}"
-                      </p>
-
-                      <div className="mt-auto">
-                        <h4 className="font-bold text-foreground text-lg">{t.name}</h4>
-                        <p className="text-sm text-primary font-medium">{t.role}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
+    <div className="overflow-hidden touch-pan-y" ref={emblaRef}> {/* Added touch-pan-y for better mobile scrolling */}
+      <div className="flex -mr-4">
+        {testimonials.map((t, index) => (
+          <div
+            key={index}
+            className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] pr-4"
+          >
+            <Card className="h-full mx-1 border-none shadow-md">
+              <CardContent className="p-6 flex flex-col items-center text-center">
+                <div className="relative mb-4">
+                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-4 border-primary/10">
+                    <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
+                  </div>
                 </div>
-              ))}
-            </div>
+                <p className="text-sm md:text-base text-muted-foreground mb-4 italic leading-relaxed">
+                  "{t.text}"
+                </p>
+                <div className="mt-auto">
+                  <h4 className="font-bold text-foreground">{t.name}</h4>
+                  <p className="text-xs text-primary">{t.role}</p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
-
-          <p className="text-center text-sm text-muted-foreground mt-8 animate-pulse">
-            تتحرك البطاقات تلقائياً، أو يمكنك السحب للمشاهدة
-          </p>
-        </div>
-      </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
     </div>
   );
 }
