@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Truck, Package, Clock, Users, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function Services() {
+  const [isMounted, setIsMounted] = useState(false);
+
   // --- Data ---
   const services = [
     { icon: Truck, title: "نقل آمن", description: "نقل آمن وموثوق لأثاثك مع فريق محترف" },
@@ -65,12 +67,19 @@ export default function Services() {
     Autoplay({ delay: 5000, stopOnInteraction: false })
   ]);
 
-  // CRITICAL FIX: This ensures Embla recognizes all 6 cards on mount/update
+  // Ensure component is mounted to prevent hydration mismatches
   useEffect(() => {
-    if (emblaApi) {
+    setIsMounted(true);
+  }, []);
+
+  // Force Embla to recognize all slides (especially after Vercel deployment)
+  useEffect(() => {
+    if (isMounted && emblaApi) {
       emblaApi.reInit();
     }
-  }, [emblaApi, testimonials]);
+  }, [isMounted, emblaApi, testimonials]);
+
+  if (!isMounted) return null;
 
   return (
     <div className="space-y-0 overflow-x-hidden">
@@ -89,8 +98,8 @@ export default function Services() {
                       <service.icon className="w-8 h-8 text-primary" />
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-center text-foreground">{service.title}</h3>
-                  <p className="text-center text-muted-foreground">{service.description}</p>
+                  <h3 className="text-xl font-bold mb-2 text-center text-foreground font-arabic">{service.title}</h3>
+                  <p className="text-center text-muted-foreground font-arabic">{service.description}</p>
                 </Card>
               </div>
             ))}
@@ -106,11 +115,14 @@ export default function Services() {
           </h2>
 
           <div className="overflow-hidden touch-pan-y" ref={emblaRef}>
-            {/* FIX: -ml-4 on container and pl-4 on items creates the perfect RTL gap */}
+            {/* FIX: -ml-4 on container pulls the items together.
+                pl-4 on slides creates the gap.
+                This prevents the "missing cards" and "extra space" bugs in RTL.
+            */}
             <div className="flex -ml-4">
               {testimonials.map((t, index) => (
                 <div
-                  key={`${t.name}-${index}`}
+                  key={`testimonial-${index}`}
                   className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pl-4"
                 >
                   <Card className="h-full border-none shadow-md transition-all duration-300 hover:shadow-xl mx-1">
@@ -129,13 +141,13 @@ export default function Services() {
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground mb-6 italic leading-relaxed text-sm md:text-base">
+                      <p className="text-muted-foreground mb-6 italic leading-relaxed text-sm md:text-base font-arabic">
                         "{t.text}"
                       </p>
 
                       <div className="mt-auto">
-                        <h4 className="font-bold text-foreground text-lg">{t.name}</h4>
-                        <p className="text-sm text-primary font-medium">{t.role}</p>
+                        <h4 className="font-bold text-foreground text-lg font-arabic">{t.name}</h4>
+                        <p className="text-sm text-primary font-medium font-arabic">{t.role}</p>
                       </div>
                     </CardContent>
                   </Card>
