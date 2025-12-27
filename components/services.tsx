@@ -30,6 +30,12 @@ export default function Services() {
       image: "https://ui-avatars.com/api/?name=S&background=0D9488&color=fff", 
       text: "التزام تام بالمواعيد وسرعة في الإنجاز. التغليف كان متقناً وحمى القطع الزجاجية تماماً." 
     },
+     { 
+      name: "مصطفي المغازي", 
+      role: "عميل سكني", 
+      image: "https://ui-avatars.com/api/?name=M&background=0D9488&color=fff", 
+      text: "سرعة استجابة مذهلة وأسعار شفافة بدون تكاليف مخفية." 
+    },
     { 
       name: "فيصل العتيبي", 
       role: "عميل تجاري", 
@@ -48,12 +54,7 @@ export default function Services() {
       image: "https://ui-avatars.com/api/?name=Ab&background=0D9488&color=fff", 
       text: "خدمة احترافية جداً، تم التعامل مع المعدات المكتبية بدقة عالية." 
     },
-    { 
-      name: "مصطفي المغازي", 
-      role: "عميل سكني", 
-      image: "https://ui-avatars.com/api/?name=M&background=0D9488&color=fff", 
-      text: "سرعة استجابة مذهلة وأسعار شفافة بدون تكاليف مخفية." 
-    },
+   
   ];
 
   // --- Carousel Configuration ---
