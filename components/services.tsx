@@ -12,18 +12,13 @@ const [emblaRef, emblaApi] = useEmblaCarousel({
   dir: "rtl", 
   loop: true, 
   align: "start",
-  duration: 20, 
-  slidesToScroll: 1
-}, [
-  Autoplay({ delay: 5000, stopOnInteraction: true })
-]);
-
-// This is the "Used" part - it fixes the Vercel/Next.js hydration gaps
-React.useEffect(() => {
+  }, [Autoplay()]);
+ React.useEffect(() => {
   if (emblaApi) {
+    // This tells Embla: "The data changed, recalculate the 6 cards"
     emblaApi.reInit();
   }
-}, [emblaApi]);
+}, [emblaApi, testimonials]);
 
   // --- Data ---
   const services = [
@@ -106,19 +101,13 @@ React.useEffect(() => {
       آراء عملائنا
     </h2>
 
-    <div className="overflow-hidden" ref={emblaRef}>
-      {/* FIX 1: Change flex to 'flex -ml-4' 
-         This pulls the slides together to eliminate the desktop gap.
-      */}
-      <div className="flex -ml-4">
-        {testimonials.map((t, index) => (
-          <div
-            key={index}
-            /* FIX 2: Use 'pl-4' for the gap and 'min-w-0' to prevent text expansion.
-               This ensures 1 card on mobile and exactly 3 on desktop.
-            */
-            className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pl-4"
-          >
+   <div className="overflow-hidden" ref={emblaRef}>
+  <div className="flex -ml-4"> {/* Negative margin pulls all 6 cards into the flex row */}
+    {testimonials.map((t, index) => (
+      <div
+        key={index}
+        className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] pl-4"
+      >
             <Card className="h-full border-none shadow-md transition-all duration-300 hover:shadow-xl">
               <CardContent className="p-6 md:p-8 flex flex-col items-center text-center h-full">
                 
