@@ -77,7 +77,7 @@ export default function Services() {
     duration: 25,
     slidesToScroll: 1
   }, [
-    Autoplay({ delay: 5000, stopOnInteraction: false })
+    Autoplay({ delay: 500, stopOnInteraction: false })
   ]);
 
   // Set mounted state
