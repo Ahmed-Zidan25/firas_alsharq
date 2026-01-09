@@ -1,20 +1,13 @@
-"use client"; // Keep this here!
+// components/reviews-list.tsx
+"use client"; 
+
 import { useEffect, useState } from "react";
 
-// Use 'export default' specifically
+// Must be 'export default'
 export default function ReviewsList() {
   const [reviews, setReviews] = useState([]);
-  
-  useEffect(() => {
-    fetch('/api/admin/fetch-all')
-      .then(res => res.json())
-      .then(data => setReviews(data))
-      .catch(err => console.error(err));
-  }, []);
-
+  // ... rest of your code
   return (
-    <div className="grid gap-4">
-       {/* Your reviews mapping code */}
-    </div>
+    <div>{/* Review items */}</div>
   );
 }

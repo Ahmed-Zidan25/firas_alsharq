@@ -1,13 +1,14 @@
 import { NextResponse } from 'next/server';
 
-// 1. Force this to stay dynamic so Vercel doesn't crash during build
+// This prevents the build-time "Failed to collect page data" error on Vercel
 export const dynamic = 'force-dynamic'; 
 
 export async function GET() {
   try {
-    // 2. Here is where you would normally call your Database (Prisma/MongoDB)
+    // Replace this array with your actual database call later
     const reviews = [
-      { id: 1, name: "Ahmed", comment: "Great service!", approved: true }
+      { id: 1, name: "عميل 1", comment: "خدمة رائعة جداً", approved: true },
+      { id: 2, name: "عميل 2", comment: "شغل احترافي وسريع", approved: true }
     ];
 
     return NextResponse.json(reviews);
