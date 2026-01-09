@@ -2,7 +2,7 @@ import Header from "@/components/header"
 import Hero from "@/components/hero"
 import Services from "@/components/services"
 import WhyUs from "@/components/why-us"
-import WhyUs from "@/components/review"
+import Review from "@/components/review"
 import CallToAction from "@/components/call-to-action"
 import Footer from "@/components/footer"
 
