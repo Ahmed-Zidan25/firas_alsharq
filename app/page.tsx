@@ -1,3 +1,6 @@
+// app/page.tsx
+export const dynamic = 'force-dynamic'; // This prevents the build-time DB connection error
+
 import Header from "@/components/header"
 import Hero from "@/components/hero"
 import Services from "@/components/services"
@@ -13,7 +16,7 @@ export default function Home() {
       <Hero />
       <Services />
       <WhyUs />
-	  <Review />
+      <Review />
       <CallToAction />
       <Footer />
     </main>
