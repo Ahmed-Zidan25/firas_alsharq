@@ -1,10 +1,18 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { CheckCircle } from "lucide-react"
+import type { Metadata, Viewport } from 'next' // Added types for safety
 
-export const metadata = {
+// 1. Standard Metadata Export
+export const metadata: Metadata = {
   title: "عن فراس الشرق",
   description: "تعرف على فراس الشرق - متخصصة في نقل الأثاث والمنقولات",
+}
+
+// 2. Separate Viewport Export (This fixes the warning)
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function AboutPage() {
