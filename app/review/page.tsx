@@ -23,7 +23,7 @@ export default function ReviewPage() {
         <input name="name" placeholder="الإسم" required className="w-full p-2 border rounded" />
         
         <select name="rating" className="w-full p-2 border rounded">
-		  =<option value="5">⭐⭐⭐⭐⭐</option>
+		      <option value="5">⭐⭐⭐⭐⭐</option>
           <option value="4">⭐⭐⭐⭐</option>
           <option value="3">⭐⭐⭐</option>
           <option value="2">⭐⭐</option>
