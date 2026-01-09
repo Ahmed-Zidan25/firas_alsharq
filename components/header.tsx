@@ -14,7 +14,9 @@ export default function Header() {
     { label: "عنا", href: "/about" },
     { label: "خدماتنا", href: "/#services" },
     { label: "البوم الصور", href: "/gallery" },
+    { label: "قيم خدماتنا ", href: "/#review" },
     { label: "تواصل معنا", href: "/contact" },
+   
   ]
 
   return (
