@@ -1,36 +1,30 @@
-import postgres from 'postgres';
-import { Star } from "lucide-react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+"use client";
+import { useEffect, useState } from "react";
 
-const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
+export default function ReviewsList() {
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function ReviewsList() {
-  // جلب التعليقات التي تمت الموافقة عليها فقط
-  const reviews = await sql`
-    SELECT * FROM reviews 
-    WHERE approved = true 
-    ORDER BY id DESC 
-    LIMIT 6
-  `;
+  useEffect(() => {
+    // Relative URL works fine on the client side
+    fetch('/api/admin/fetch-all')
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data);
+        setLoading(false);
+      })
+      .catch((err) => console.error("Error:", err));
+  }, []);
 
-  if (reviews.length === 0) return null;
+  if (loading) return <p>جاري التحميل...</p>;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-10 px-4">
-      {reviews.map((review) => (
-        <Card key={review.id} className="shadow-sm">
-          <CardHeader className="pb-2">
-            <div className="flex text-yellow-500 mb-1">
-              {[...Array(review.rating)].map((_, i) => (
-                <Star key={i} size={16} fill="currentColor" />
-              ))}
-            </div>
-            <h3 className="font-bold text-lg">{review.name}</h3>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-600 italic">"{review.comment}"</p>
-          </CardContent>
-        </Card>
+    <div className="grid gap-4">
+      {reviews.map((review: any) => (
+        <div key={review.id} className="p-4 border rounded shadow-sm">
+          <h3 className="font-bold">{review.name}</h3>
+          <p>{review.comment}</p>
+        </div>
       ))}
     </div>
   );

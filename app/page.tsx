@@ -1,3 +1,4 @@
+"use client"
 
 export const dynamic = 'force-dynamic'; // This prevents the build-time DB connection error
 import ReviewsList from "@/components/reviews-list";
