@@ -23,12 +23,11 @@ export default function ReviewPage() {
         <input name="name" placeholder="الإسم" required className="w-full p-2 border rounded" />
         
         <select name="rating" className="w-full p-2 border rounded">
-		  <option value="6"> </option>
-          <option value="5">★★★★★</option>
-          <option value="4">★★★★</option>
-          <option value="3">★★★</option>
-          <option value="2">★★</option>
-          <option value="1">★</option>
+		  =<option value="5">⭐⭐⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="1">⭐</option>
         </select>
 
         <textarea name="comment" placeholder="احكي تجربتك معنا" required className="w-full p-2 border rounded h-32" />
