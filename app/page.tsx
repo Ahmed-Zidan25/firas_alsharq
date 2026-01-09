@@ -1,4 +1,5 @@
-// app/page.tsx
+import ReviewsList from "@/components/reviews-list";
+
 export const dynamic = 'force-dynamic'; // This prevents the build-time DB connection error
 
 import Header from "@/components/header"
