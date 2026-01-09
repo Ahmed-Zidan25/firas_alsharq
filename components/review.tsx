@@ -1,55 +1,24 @@
-import { redirect } from 'next/navigation';
-import postgres from 'postgres';
-import { submitReview } from './actions';
-
-// Connect to Neon safely
-const sql = process.env.DATABASE_URL 
-  ? postgres(process.env.DATABASE_URL, { ssl: 'require' }) 
-  : null;
-
-export default async function ReviewsPage() {
-  // Fallback if the database connection is not available during build
-  if (!sql) {
-    return <p className="text-center py-4">Loading reviews...</p>;
-  }
-
-  try {
-    const reviews = await sql`
-      SELECT id, name, rating, comment, created_at 
-      FROM reviews 
-      WHERE approved = true 
-      ORDER BY created_at DESC
-    `;
-
-    return (
-      <div className="max-w-2xl mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">Customer Reviews</h1>
+export default function ReviewPage() {
+  return (
+    <div className="max-w-md mx-auto py-10">
+      <h1 className="text-2xl font-bold mb-4">Leave a Review</h1>
+      <form action="/api/submit-review" method="POST" className="space-y-4">
+        <input name="name" placeholder="Your Name" required className="w-full p-2 border rounded" />
         
-        <form action={submitReview} className="mb-8 p-4 border rounded shadow-sm">
-          <input name="name" placeholder="Your Name" required className="block w-full mb-2 p-2 border" />
-          <select name="rating" className="block w-full mb-2 p-2 border">
-            {[5,4,3,2,1].map(n => <option key={n} value={n}>{n} Stars</option>)}
-          </select>
-          <textarea name="comment" placeholder="Your Review" required className="block w-full mb-2 p-2 border" />
-          <button type="submit" className="bg-black text-white px-4 py-2 rounded">Submit Review</button>
-        </form>
+        <select name="rating" className="w-full p-2 border rounded">
+          <option value="5">5 Stars ★★★★★</option>
+          <option value="4">4 Stars ★★★★</option>
+          <option value="3">3 Stars ★★★</option>
+          <option value="2">2 Stars ★★</option>
+          <option value="1">1 Star ★</option>
+        </select>
 
-        <div className="space-y-4">
-          {reviews.length === 0 ? (
-            <p className="text-gray-500">No reviews yet.</p>
-          ) : (
-            reviews.map((rev) => (
-              <div key={rev.id} className="border-b pb-4">
-                <div className="font-bold">{rev.name} — {rev.rating}/5 ⭐</div>
-                <p className="text-gray-600">{rev.comment}</p>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
-    );
-  } catch (error) {
-    console.error("Failed to fetch reviews:", error);
-    return <p className="text-gray-500">Reviews are currently unavailable.</p>;
-  }
+        <textarea name="comment" placeholder="Your experience..." required className="w-full p-2 border rounded h-32" />
+        
+        <button type="submit" className="bg-black text-white px-4 py-2 rounded">
+          Submit Review
+        </button>
+      </form>
+    </div>
+  );
 }
