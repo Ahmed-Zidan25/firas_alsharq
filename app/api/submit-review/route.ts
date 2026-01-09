@@ -1,43 +1,25 @@
+import { NextResponse } from 'next/server';
 
+// This prevents Vercel from trying to "pre-render" this route during build
 export const dynamic = 'force-dynamic';
-import postgres from 'postgres';
-import { redirect } from 'next/navigation';
-
-// التأكد من الاتصال بقاعدة البيانات
-const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
 
 export async function POST(request: Request) {
-  let success = false;
-
   try {
-    const formData = await request.formData();
+    const body = await request.json();
+    const { name, comment } = body;
+
+    // 1. Validate data
+    if (!name || !comment) {
+      return NextResponse.json({ error: "Name and comment are required" }, { status: 400 });
+    }
+
+    // 2. SAVE TO DATABASE HERE 
+    // Example: await prisma.review.create({ data: { name, comment, approved: false } });
     
-    const name = formData.get('name');
-    const rating = formData.get('rating');
-    const comment = formData.get('comment');
+    console.log("New review received:", name, comment);
 
-    // التأكد من أن التقييم لا يتجاوز 5 في حال تم اختيار الخيار الفارغ
-    const validatedRating = Number(rating) > 5 ? 5 : Number(rating);
-
-    await sql`
-      INSERT INTO reviews (name, rating, comment, approved)
-      VALUES (
-        ${String(name)}, 
-        ${validatedRating}, 
-        ${String(comment)}, 
-        false
-      )
-    `;
-
-    success = true;
+    return NextResponse.json({ message: "Review submitted successfully" }, { status: 201 });
   } catch (error) {
-    // هذا سيطبع لك تفاصيل الخطأ في الـ Terminal الخاص بـ VS Code
-    console.error('Database Insertion Error:', error);
-    return new Response('حدث خطأ أثناء حفظ التعليق', { status: 500 });
-  }
-
-  // التحويل يتم هنا حصراً بعد نجاح الـ try بالكامل
-  if (success) {
-    redirect('/thank-you'); 
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
