@@ -1,8 +1,18 @@
-import { sql } from '@vercel/postgres';
+import { redirect } from 'next/navigation';
+import postgres from 'postgres';
 import { submitReview } from './actions';
 
+// Connect to Neon using your environment variable
+const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
+
 export default async function ReviewsPage() {
-  const { rows: reviews } = await sql`SELECT * FROM reviews ORDER BY created_at DESC`;
+  // Fetch reviews using the postgres-js syntax
+  const reviews = await sql`
+    SELECT id, name, rating, comment, created_at 
+    FROM reviews 
+    WHERE approved = true 
+    ORDER BY created_at DESC
+  `;
 
   return (
     <div className="max-w-2xl mx-auto p-4">
@@ -20,12 +30,16 @@ export default async function ReviewsPage() {
 
       {/* Review List */}
       <div className="space-y-4">
-        {reviews.map((rev) => (
-          <div key={rev.id} className="border-b pb-4">
-            <div className="font-bold">{rev.name} — {rev.rating}/5 ⭐</div>
-            <p className="text-gray-600">{rev.comment}</p>
-          </div>
-        ))}
+        {reviews.length === 0 ? (
+          <p className="text-gray-500">No reviews yet.</p>
+        ) : (
+          reviews.map((rev) => (
+            <div key={rev.id} className="border-b pb-4">
+              <div className="font-bold">{rev.name} — {rev.rating}/5 ⭐</div>
+              <p className="text-gray-600">{rev.comment}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
