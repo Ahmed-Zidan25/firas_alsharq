@@ -1,34 +1,25 @@
-import { createClient } from '@supabase/supabase-js'
-import { redirect } from 'next/navigation'
+import postgres from 'postgres';
+import { redirect } from 'next/navigation';
 
-// Initialize Supabase (Ideally, move these to .env.local)
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+// This connects to Neon using the environment variable Vercel creates for you
+const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
 
 export async function POST(request: Request) {
-  const formData = await request.formData();
-  const name = formData.get('name');
-  const rating = formData.get('rating');
-  const comment = formData.get('comment');
+  try {
+    const formData = await request.formData();
+    const name = formData.get('name');
+    const rating = formData.get('rating');
+    const comment = formData.get('comment');
 
-  // Save to Supabase
-  const { error } = await supabase
-    .from('reviews') // Make sure your table name is 'reviews'
-    .insert([
-      { 
-        name: name, 
-        rating: Number(rating), 
-        comment: comment, 
-        approved: false 
-      },
-    ])
+    // Insert into Neon
+    await sql`
+      INSERT INTO reviews (name, rating, comment, approved)
+      VALUES (${String(name)}, ${Number(rating)}, ${String(comment)}, false)
+    `;
 
-  if (error) {
-    console.error('Error inserting review:', error)
-    return new Response('Error saving review', { status: 500 })
+    return redirect('/thank-you');
+  } catch (error) {
+    console.error('Database Error:', error);
+    return new Response('Error saving review', { status: 500 });
   }
-
-  redirect('/thank-you');
 }
