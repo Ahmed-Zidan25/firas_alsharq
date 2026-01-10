@@ -1,27 +1,24 @@
 import { NextResponse } from 'next/server';
-
-export const dynamic = 'force-dynamic';
+import { neon } from '@neondatabase/serverless';
 
 export async function POST(request: Request) {
   try {
-    // 1. Use formData() instead of json() for standard HTML forms
-    const formData = await request.formData();
-    const name = formData.get('name');
-    const comment = formData.get('comment');
-    const rating = formData.get('rating');
+    const body = await request.json();
+    const { name, rating, comment } = body;
 
-    // 2. Validate
-    if (!name || !comment) {
-      return NextResponse.json({ error: "Name and comment are required" }, { status: 400 });
-    }
+    // Connect to Neon using your environment variable
+    const sql = neon(process.env.DATABASE_URL!);
 
-    console.log("Review received:", { name, comment, rating });
+    // Insert into the new table: firasalsharq
+    // Ensure the column names (name, review, comment) match your Neon table
+    await sql`
+      INSERT INTO firasalsharq (name, review, comment)
+      VALUES (${name}, ${rating}, ${comment})
+    `;
 
-    // 3. Redirect user back to a "thank you" page or the home page
-    return Response.redirect(new URL('/?success=true', request.url));
-
+    return NextResponse.json({ message: "Review saved!" }, { status: 201 });
   } catch (error) {
-    console.error("Submission error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error("Database Error:", error);
+    return NextResponse.json({ error: "Could not save to database" }, { status: 500 });
   }
 }
