@@ -5,14 +5,28 @@ export default function AdminDashboard() {
   const [reviews, setReviews] = useState([]);
   const [password, setPassword] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // جلب كل التعليقات (الموافقة وغير الموافقة)
   const fetchReviews = async () => {
-    // سنحتاج لإنشاء GET API أو استخدام Server Actions، للتبسيط سنفترض وجود API لجلب الكل
-    const res = await fetch('/api/get-all-reviews'); 
-    const data = await res.json();
-    setReviews(data);
+    try {
+      const res = await fetch('/api/get-all-reviews'); 
+      const data = await res.json();
+      setReviews(data);
+    } catch (err) {
+      console.error("Failed to load reviews");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  // هذا الجزء ضروري لجلب البيانات فور الدخول
+  useEffect(() => {
+    if (isAuthorized) {
+      fetchReviews();
+    }
+  }, [isAuthorized]);
+
+  // ... باقي الكود (دالة handleAction و return)
 
   const handleAction = async (id: number, action: 'approve' | 'delete') => {
     const method = action === 'approve' ? 'PATCH' : 'DELETE';
@@ -58,21 +72,34 @@ export default function AdminDashboard() {
             <th className="border p-2">إجراءات</th>
           </tr>
         </thead>
-        <tbody>
-          {reviews.map((rev: any) => (
-            <tr key={rev.id}>
-              <td className="border p-2">{rev.name}</td>
-              <td className="border p-2">{rev.comment}</td>
-              <td className="border p-2">{rev.approved ? "✅ معتمد" : "⏳ معلق"}</td>
-              <td className="border p-2 space-x-2 space-x-reverse">
-                {!rev.approved && (
-                  <button onClick={() => handleAction(rev.id, 'approve')} className="bg-green-500 text-white px-2 py-1 rounded">موافقة</button>
-                )}
-                <button onClick={() => handleAction(rev.id, 'delete')} className="bg-red-500 text-white px-2 py-1 rounded">حذف</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+       <tbody>
+  {loading ? (
+    <tr><td colSpan={4} className="text-center p-4">جاري تحميل التعليقات...</td></tr>
+  ) : reviews.length === 0 ? (
+    <tr><td colSpan={4} className="text-center p-4 text-red-500">لا توجد تعليقات في قاعدة البيانات حالياً.</td></tr>
+  ) : (
+    reviews.map((rev: any) => (
+      <tr key={rev.id} className="hover:bg-gray-50">
+        <td className="border p-2">{rev.name}</td>
+        <td className="border p-2">{rev.comment}</td>
+        <td className="border p-2">
+          {rev.approved ? 
+            <span className="text-green-600 font-bold text-sm">✅ معتمد</span> : 
+            <span className="text-orange-500 font-bold text-sm">⏳ معلق</span>
+          }
+        </td>
+        <td className="border p-2">
+          <div className="flex gap-2">
+            {!rev.approved && (
+              <button onClick={() => handleAction(rev.id, 'approve')} className="bg-green-500 text-white px-3 py-1 rounded text-sm">موافقة</button>
+            )}
+            <button onClick={() => handleAction(rev.id, 'delete')} className="bg-red-500 text-white px-3 py-1 rounded text-sm">حذف</button>
+          </div>
+        </td>
+      </tr>
+    ))
+  )}
+</tbody>
       </table>
     </div>
   );
