@@ -1,61 +1,72 @@
-import { neon } from '@neondatabase/serverless';
+"use client";
 
-// إجبار المكون على جلب بيانات حديثة دائماً عند التحميل
-export const revalidate = 0; 
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
-async function getApprovedReviews() {
-  try {
-    const sql = neon(process.env.DATABASE_URL!);
-    // جلب التعليقات التي حالتها approved = true فقط
-    const data = await sql`
-      SELECT name, review, comment, created_at 
-      FROM firasalsharq 
-      WHERE approved = true 
-      ORDER BY created_at DESC
-    `;
-    return data;
-  } catch (error) {
-    console.error("Error fetching reviews:", error);
-    return [];
-  }
-}
+export default function InfiniteTestimonials() {
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function Testimonials() {
-  const reviews = await getApprovedReviews();
+  useEffect(() => {
+    async function loadReviews() {
+      try {
+        const res = await fetch('/api/get-approved-reviews');
+        const data = await res.json();
+        // نكرر المصفوفة لضمان استمرارية الحركة اللانهائية
+        setReviews([...data, ...data]);
+      } catch (error) {
+        console.error("Failed to load reviews", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadReviews();
+  }, []);
 
-  if (reviews.length === 0) {
-    return null; // لا يتم عرض القسم إذا لم تكن هناك تعليقات معتمدة
-  }
+  if (loading || reviews.length === 0) return null;
 
   return (
-    <section className="py-12 bg-gray-50" dir="rtl">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
-          ماذا يقول عملاؤنا عن فراس الشرق؟
-        </h2>
+    <section className="py-16 bg-white overflow-hidden" dir="rtl">
+      <div className="mb-10 text-center">
+        <h2 className="text-3xl font-bold text-gray-800">قالوا عن فراس الشرق</h2>
+      </div>
+
+      {/* الحاوية الخارجية التي تخفي الأطراف الخارجة عن الشاشة */}
+      <div className="relative flex overflow-x-hidden group">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reviews.map((rev, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between">
-              <div>
-                <div className="flex text-yellow-400 mb-3">
-                  {/* عرض النجوم بناءً على الرقم المخزن في review */}
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <span key={i}>{i < (Number(rev.review) || 5) ? "★" : "☆"}</span>
-                  ))}
-                </div>
-                <p className="text-gray-600 italic mb-4">"{rev.comment}"</p>
+        {/* شريط الحركة اللانهائي */}
+        <motion.div 
+          className="flex whitespace-nowrap"
+          animate={{ x: ["0%", "-50%"] }} // التحرك بمقدار نصف طول المصفوفة المكررة
+          transition={{ 
+            ease: "linear", 
+            duration: 25, // سرعة الحركة (كلما زاد الرقم كانت أبطأ وأهدأ)
+            repeat: Infinity 
+          }}
+          // التوقف المؤقت عند مرور الماوس
+          whileHover={{ transition: { duration: 0 } }} 
+        >
+          {reviews.map((rev: any, index: number) => (
+            <div 
+              key={index} 
+              className="inline-block w-[300px] md:w-[400px] mx-4 bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm"
+            >
+              <div className="flex text-yellow-400 mb-2">
+                {"★".repeat(Number(rev.review))}
               </div>
-              
-              <div className="border-t pt-4 mt-auto">
-                <p className="font-bold text-gray-900">{rev.name}</p>
-                <p className="text-xs text-gray-400 mt-1">
-                  {new Date(rev.created_at).toLocaleDateString('ar-EG')}
-                </p>
+              <p className="text-gray-600 whitespace-normal leading-relaxed italic mb-4">
+                "{rev.comment}"
+              </p>
+              <div className="border-t pt-3">
+                <span className="font-bold text-gray-800">{rev.name}</span>
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* إضافة تأثير التدرج الشفاف على الجوانب (اختياري لجمالية أكثر) */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent"></div>
       </div>
     </section>
   );

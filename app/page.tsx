@@ -4,7 +4,7 @@ import Header from "@/components/header";
 import Hero from "@/components/hero";
 import Services from "@/components/services";
 import WhyUs from "@/components/why-us";
-import Review from "@/components/testimonials"; 
+import Testimonials from "@/components/testimonials"; 
 import CallToAction from "@/components/call-to-action";
 
 import Footer from "@/components/footer";
@@ -18,7 +18,7 @@ export default function Home() {
       <Hero />
       <Services />
       <WhyUs />
-	  <Testimonials />
+	    <Testimonials />
       <CallToAction />
       <Footer />
     </main>
