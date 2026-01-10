@@ -118,15 +118,17 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="py-12 bg-gray-50">
+	  {/*  <section className="py-12 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-10">آراء عملائنا</h2>
           
-          {/* استدعاء مكون التعليقات هنا */}
+      
           <ReviewsList />
           
         </div>
-      </section>
+            </section>  */}
+     
+
     </div>
   );
 }
