@@ -1,13 +1,14 @@
-"use client"; // This must be at the very top
-
+"use client";
 import React from 'react';
 
-// Use "export default" to match the import in page.tsx
-export default function ReviewsList() {
+// Use a simple function expression and default export
+const ReviewsList = () => {
   return (
-    <div className="grid gap-6">
-      {/* Your reviews logic here */}
-      <p className="text-center text-gray-600">Review content goes here</p>
+    <div className="py-10 text-center text-black">
+      <h2 className="text-2xl font-bold">آراء عملائنا</h2>
+      <p>Content goes here...</p>
     </div>
   );
-}
+};
+
+export default ReviewsList;
