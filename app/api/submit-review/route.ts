@@ -16,8 +16,14 @@ export async function POST(request: Request) {
     `;
 
     return NextResponse.json({ message: "تم حفظ التعليق بنجاح!" }, { status: 201 });
-  } catch (error) {
-    console.error("Database Error:", error);
-    return NextResponse.json({ error: "خطأ في الاتصال بقاعدة البيانات" }, { status: 500 });
-  }
+  } 
+  
+  // ابحث عن هذا الجزء في ملف route.ts وحدثه
+ catch (error: any) {
+    console.error("Database Error Details:", error.message); // سيظهر في Vercel Logs
+    return NextResponse.json({ 
+        error: "خطأ في الاتصال بقاعدة البيانات", 
+        details: error.message // سيظهر لك في المتصفح لتعرف المشكلة
+    }, { status: 500 });
 }
+
