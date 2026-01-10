@@ -6,19 +6,18 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, rating, comment } = body;
 
-    // Connect to Neon using your environment variable
+    // Connect using the URL from your Environment Variables
     const sql = neon(process.env.DATABASE_URL!);
 
-    // Insert into the new table: firasalsharq
-    // Ensure the column names (name, review, comment) match your Neon table
+    // Insert into your new table 'firasalsharq'
     await sql`
       INSERT INTO firasalsharq (name, review, comment)
       VALUES (${name}, ${rating}, ${comment})
     `;
 
-    return NextResponse.json({ message: "Review saved!" }, { status: 201 });
+    return NextResponse.json({ message: "تم حفظ التعليق بنجاح!" }, { status: 201 });
   } catch (error) {
     console.error("Database Error:", error);
-    return NextResponse.json({ error: "Could not save to database" }, { status: 500 });
+    return NextResponse.json({ error: "خطأ في الاتصال بقاعدة البيانات" }, { status: 500 });
   }
 }
