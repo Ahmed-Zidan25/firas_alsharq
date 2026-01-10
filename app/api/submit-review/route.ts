@@ -6,24 +6,22 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, rating, comment } = body;
 
-    // Connect using the URL from your Environment Variables
+    // الاتصال بقاعدة البيانات
     const sql = neon(process.env.DATABASE_URL!);
 
-    // Insert into your new table 'firasalsharq'
+    // إدخال البيانات في الجدول
     await sql`
       INSERT INTO firasalsharq (name, review, comment)
       VALUES (${name}, ${rating}, ${comment})
     `;
 
     return NextResponse.json({ message: "تم حفظ التعليق بنجاح!" }, { status: 201 });
-  } 
-  
-  // ابحث عن هذا الجزء في ملف route.ts وحدثه
- catch (error: any) {
-    console.error("Database Error Details:", error.message); // سيظهر في Vercel Logs
+    
+  } catch (error: any) {
+    console.error("Database Error Details:", error.message);
     return NextResponse.json({ 
         error: "خطأ في الاتصال بقاعدة البيانات", 
-        details: error.message // سيظهر لك في المتصفح لتعرف المشكلة
+        details: error.message 
     }, { status: 500 });
+  }
 }
-
