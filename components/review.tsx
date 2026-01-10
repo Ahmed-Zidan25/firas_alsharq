@@ -2,11 +2,19 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Star, Send, User, MessageSquare, Quote } from 'lucide-react';
+import { Star, Send, User, MessageSquare, Truck, ShieldCheck } from 'lucide-react';
 
 export default function ReviewPage() {
   const [loading, setLoading] = useState(false);
   const [rating, setRating] = useState(5);
+
+  // الهوية اللونية لموقع فراس الشرق (الأحمر والرمادي)
+  const colors = {
+    brandRed: "#e53e3e",    // الأحمر الأساسي للموقع
+    brandDark: "#2d3748",   // الرمادي الغامق للنصوص والعناوين
+    starYellow: "#f6ad55",  // الأصفر للنجوم
+    lightBg: "#f7fafc"
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,7 +23,7 @@ export default function ReviewPage() {
     const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get('name'),
-      rating: rating, // نستخدم الحالة المحسنة للنجوم
+      rating: rating,
       comment: formData.get('comment'),
     };
 
@@ -27,11 +35,11 @@ export default function ReviewPage() {
       });
 
       if (response.ok) {
-        alert("شكراً لك! تم إرسال تقييمك بنجاح وسيظهر بعد مراجعة الإدارة.");
+        alert("شكراً لثقتكم! تم استلام تقييمكم بنجاح.");
         (e.target as HTMLFormElement).reset();
         setRating(5);
       } else {
-        alert("فشل إرسال التعليق، يرجى المحاولة مرة أخرى.");
+        alert("عذراً، حدث خطأ أثناء الإرسال.");
       }
     } catch (error) {
       console.error(error);
@@ -41,84 +49,94 @@ export default function ReviewPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4" dir="rtl">
+    <div className="min-h-screen bg-[#f7fafc] py-16 px-4 font-sans" dir="rtl">
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="max-w-2xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-2xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100"
       >
-        <div className="bg-black p-8 text-white text-center relative">
-          <Quote className="absolute top-4 right-4 opacity-20 w-12 h-12" />
-          <h1 className="text-3xl font-bold mb-2">رأيك يهمنا</h1>
-          <p className="text-gray-400">ساعدنا لنقدم لك خدمة أفضل في فراس الشرق</p>
+        {/* Header - الهوية الحمراء لفراس الشرق */}
+        <div className="bg-[#e53e3e] p-12 text-white text-center relative overflow-hidden">
+          <Truck className="absolute -bottom-4 -left-4 opacity-15 w-32 h-32 rotate-12" />
+          <motion.div 
+             initial={{ scale: 0 }} 
+             animate={{ scale: 1 }} 
+             className="inline-flex items-center justify-center p-4 bg-white/20 rounded-full mb-6 backdrop-blur-sm"
+          >
+            <ShieldCheck className="w-10 h-10 text-white" />
+          </motion.div>
+          <h1 className="text-3xl font-extrabold mb-3 tracking-tight">شاركنا تجربتك مع فراس الشرق</h1>
+          <p className="text-white/90 text-lg max-w-md mx-auto leading-relaxed">
+            رأيكم يساعدنا في تطوير خدمات نقل العفش لخدمتكم بشكل أفضل
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-8 space-y-6">
+        <form onSubmit={handleSubmit} className="p-10 space-y-8">
           {/* حقل الاسم */}
-          <div className="space-y-2">
-            <label className="flex items-center gap-2 text-gray-700 font-medium">
-              <User className="w-4 h-4 text-orange-500" />
-              الاسم الكامل
+          <div>
+            <label className="flex items-center gap-2 text-[#2d3748] font-bold mb-3 text-sm">
+              <User className="w-5 h-5 text-[#e53e3e]" />
+              الاسم بالكامل
             </label>
             <input 
               name="name" 
               type="text"
               placeholder="اكتب اسمك هنا..." 
               required 
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none"
+              className="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl focus:border-[#e53e3e] focus:bg-white transition-all outline-none text-gray-800 shadow-sm"
             />
           </div>
 
-          {/* اختيار التقييم بالنجوم */}
-          <div className="space-y-2 text-center py-4 bg-gray-50 rounded-2xl">
-            <label className="block text-gray-700 font-medium mb-3">تقييمك للخدمة</label>
-            <div className="flex justify-center gap-2">
+          {/* نظام النجوم */}
+          <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100 text-center shadow-inner">
+            <label className="block text-[#2d3748] font-bold mb-5 text-lg">تقييمك لخدماتنا</label>
+            <div className="flex justify-center gap-4">
               {[1, 2, 3, 4, 5].map((star) => (
-                <button
+                <motion.button
                   key={star}
                   type="button"
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={() => setRating(star)}
-                  className="transition-transform active:scale-90"
                 >
                   <Star 
-                    className={`w-10 h-10 ${star <= rating ? "fill-orange-500 text-orange-500" : "text-gray-300"}`} 
+                    className={`w-12 h-12 transition-all ${
+                      star <= rating ? "fill-[#f6ad55] text-[#f6ad55] drop-shadow-sm" : "text-gray-300"
+                    }`} 
                   />
-                </button>
+                </motion.button>
               ))}
             </div>
           </div>
 
           {/* حقل التعليق */}
-          <div className="space-y-2">
-            <label className="flex items-center gap-2 text-gray-700 font-medium">
-              <MessageSquare className="w-4 h-4 text-orange-500" />
-              تجربتك معنا
+          <div>
+            <label className="flex items-center gap-2 text-[#2d3748] font-bold mb-3 text-sm">
+              <MessageSquare className="w-5 h-5 text-[#e53e3e]" />
+              اكتب تعليقك
             </label>
             <textarea 
               name="comment" 
-              placeholder="اكتب ملاحظاتك أو تجربتك مع خدمة نقل الأثاث..." 
+              placeholder="احكي لنا عن تجربتك معنا..." 
               required 
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl h-40 focus:ring-2 focus:ring-orange-500 transition-all outline-none resize-none"
+              className="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl h-44 focus:border-[#e53e3e] focus:bg-white transition-all outline-none resize-none text-gray-800 shadow-sm"
             />
           </div>
 
-          {/* زر الإرسال */}
+          {/* زر الإرسال الأحمر */}
           <motion.button 
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.97 }}
             type="submit" 
             disabled={loading}
-            className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-orange-200 transition-colors disabled:bg-gray-400"
+            className="w-full bg-[#e53e3e] hover:bg-[#c53030] text-white font-bold py-5 rounded-2xl flex items-center justify-center gap-3 shadow-lg shadow-red-200 transition-all disabled:bg-gray-400"
           >
             {loading ? (
-              <span className="flex items-center gap-2">
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                جاري الإرسال...
-              </span>
+              <div className="w-7 h-7 border-4 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
               <>
-                <Send className="w-5 h-5 rotate-180" />
-                إرسال التقييم
+                <Send className="w-6 h-6 rotate-180" />
+                <span className="text-xl">إرسال التقييم</span>
               </>
             )}
           </motion.button>
