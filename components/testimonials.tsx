@@ -28,7 +28,7 @@ export default function InfiniteTestimonials() {
   return (
     <section className="py-16 bg-white overflow-hidden" dir="rtl">
       <div className="mb-10 text-center">
-        <h2 className="text-3xl font-bold text-gray-800">قالوا عن فراس الشرق</h2>
+        <h2 className="text-3xl font-bold text-gray-800">  آراء عملاؤنا </h2>
       </div>
 
       {/* الحاوية الخارجية التي تخفي الأطراف الخارجة عن الشاشة */}

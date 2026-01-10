@@ -1,84 +1,129 @@
 "use client";
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Star, Send, User, MessageSquare, Quote } from 'lucide-react';
 
 export default function ReviewPage() {
   const [loading, setLoading] = useState(false);
+  const [rating, setRating] = useState(5);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-    
-    // تجميع البيانات في كائن JSON
     const data = {
       name: formData.get('name'),
-      rating: formData.get('rating'),
+      rating: rating, // نستخدم الحالة المحسنة للنجوم
       comment: formData.get('comment'),
     };
 
     try {
       const response = await fetch('/api/submit-review', {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json' 
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
 
-      // محاولة قراءة الرد كـ JSON دائماً لفهم الخطأ
-      const result = await response.json();
-
       if (response.ok) {
-        alert("تم إرسال التعليق بنجاح!");
+        alert("شكراً لك! تم إرسال تقييمك بنجاح وسيظهر بعد مراجعة الإدارة.");
         (e.target as HTMLFormElement).reset();
+        setRating(5);
       } else {
-        // إذا فشل الطلب، أظهر التفاصيل التي يرسلها الـ API (مثل مشكلة JSON أو قاعدة البيانات)
-        alert("فشل الإرسال: " + (result.details || result.error || "خطأ مجهول"));
+        alert("فشل إرسال التعليق، يرجى المحاولة مرة أخرى.");
       }
-    } catch (error: any) {
-      console.error("Fetch Error:", error);
-      alert("حدث خطأ في الاتصال بالخادم.");
+    } catch (error) {
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto py-10 px-4" dir="rtl">
-      <h1 className="text-2xl font-bold mb-4">تفضل بترك تعليقك</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input 
-          name="name" 
-          placeholder="الإسم" 
-          required 
-          className="w-full p-2 border rounded text-right" 
-        />
-        
-        <select name="rating" className="w-full p-2 border rounded text-right">
-          <option value="5">★★★★★ (ممتاز)</option>
-          <option value="4">★★★★ (جيد جداً)</option>
-          <option value="3">★★★ (جيد)</option>
-          <option value="2">★★ (مقبول)</option>
-          <option value="1">★ (ضعيف)</option>
-        </select>
+    <div className="min-h-screen bg-gray-50 py-12 px-4" dir="rtl">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="max-w-2xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100"
+      >
+        <div className="bg-black p-8 text-white text-center relative">
+          <Quote className="absolute top-4 right-4 opacity-20 w-12 h-12" />
+          <h1 className="text-3xl font-bold mb-2">رأيك يهمنا</h1>
+          <p className="text-gray-400">ساعدنا لنقدم لك خدمة أفضل في فراس الشرق</p>
+        </div>
 
-        <textarea 
-          name="comment" 
-          placeholder="اوصف تجربتك معنا" 
-          required 
-          className="w-full p-2 border rounded h-32 text-right" 
-        />
-        
-        <button 
-          type="submit" 
-          disabled={loading}
-          className="bg-black text-white px-4 py-2 rounded w-full disabled:bg-gray-400 transition-colors"
-        >
-          {loading ? "جاري الإرسال..." : "انشر التعليق"}
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="p-8 space-y-6">
+          {/* حقل الاسم */}
+          <div className="space-y-2">
+            <label className="flex items-center gap-2 text-gray-700 font-medium">
+              <User className="w-4 h-4 text-orange-500" />
+              الاسم الكامل
+            </label>
+            <input 
+              name="name" 
+              type="text"
+              placeholder="اكتب اسمك هنا..." 
+              required 
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none"
+            />
+          </div>
+
+          {/* اختيار التقييم بالنجوم */}
+          <div className="space-y-2 text-center py-4 bg-gray-50 rounded-2xl">
+            <label className="block text-gray-700 font-medium mb-3">تقييمك للخدمة</label>
+            <div className="flex justify-center gap-2">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  type="button"
+                  onClick={() => setRating(star)}
+                  className="transition-transform active:scale-90"
+                >
+                  <Star 
+                    className={`w-10 h-10 ${star <= rating ? "fill-orange-500 text-orange-500" : "text-gray-300"}`} 
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* حقل التعليق */}
+          <div className="space-y-2">
+            <label className="flex items-center gap-2 text-gray-700 font-medium">
+              <MessageSquare className="w-4 h-4 text-orange-500" />
+              تجربتك معنا
+            </label>
+            <textarea 
+              name="comment" 
+              placeholder="اكتب ملاحظاتك أو تجربتك مع خدمة نقل الأثاث..." 
+              required 
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl h-40 focus:ring-2 focus:ring-orange-500 transition-all outline-none resize-none"
+            />
+          </div>
+
+          {/* زر الإرسال */}
+          <motion.button 
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            type="submit" 
+            disabled={loading}
+            className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-orange-200 transition-colors disabled:bg-gray-400"
+          >
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                جاري الإرسال...
+              </span>
+            ) : (
+              <>
+                <Send className="w-5 h-5 rotate-180" />
+                إرسال التقييم
+              </>
+            )}
+          </motion.button>
+        </form>
+      </motion.div>
     </div>
   );
 }
